@@ -1,0 +1,290 @@
+/* ─────────────────────────────────────────────────────────
+   Floating Pill Navbar
+   ───────────────────────────────────────────────────────── */
+
+/* Outer wrapper — handles position & slide-down animation */
+.navbar-wrapper {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  width: calc(100% - 48px);
+  max-width: 1160px;
+  animation: navSlideDown 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+  transition: top 0.35s ease;
+}
+
+.navbar-wrapper.is-scrolled {
+  top: 12px;
+}
+
+/* Pill container */
+.navbar-pill {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 10px 12px 10px 20px;
+  background: rgba(31, 41, 55, 0.35);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-radius: 100px;
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  box-shadow:
+    0 4px 28px rgba(0, 0, 0, 0.25),
+    0 1px 6px  rgba(0, 0, 0, 0.12);
+}
+
+/* ── Logo ───────────────────────────────────────────────── */
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.navbar-logo:hover {
+  opacity: 0.85;
+}
+
+/* ── Desktop nav menu ───────────────────────────────────── */
+.navbar-menu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  gap: 30px;
+}
+
+.navbar-menu__item {
+  font-family: 'Poppins', sans-serif;
+  font-size: 14.5px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  position: relative;
+  padding-bottom: 3px;
+  transition: color 0.2s ease;
+}
+
+.navbar-menu__item::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: #ffffff;
+  border-radius: 2px;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.25s ease;
+}
+
+.navbar-menu__item:hover {
+  color: #ffffff;
+}
+
+.navbar-menu__item:hover::after {
+  transform: scaleX(1);
+}
+
+/* ── Right-side actions ─────────────────────────────────── */
+.navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+/* ── CTA Button ─────────────────────────────────────────── */
+.navbar-cta {
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #fff;
+  border: none;
+  border-radius: 100px;
+  padding: 9px 22px;
+  background: linear-gradient(135deg, #6d28d9 0%, #8b5cf6 100%);
+  box-shadow: 0 4px 14px rgba(109, 40, 217, 0.36);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.25s ease;
+}
+
+.navbar-cta:hover {
+  background: linear-gradient(135deg, #5b21b6 0%, #7c3aed 100%);
+  box-shadow: 0 7px 22px rgba(109, 40, 217, 0.46);
+  transform: translateY(-1px) scale(1.02);
+}
+
+.navbar-cta:active {
+  transform: scale(0.98);
+}
+
+/* ── Hamburger (hidden on desktop) ─────────────────────── */
+.navbar-hamburger {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  padding: 6px;
+  background: transparent;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.navbar-hamburger:hover {
+  background: rgba(255, 255, 255, 0.10);
+}
+
+.navbar-hamburger span {
+  display: block;
+  width: 18px;
+  height: 2px;
+  background: #ffffff;
+  border-radius: 2px;
+  transition: all 0.28s ease;
+}
+
+.navbar-hamburger span + span {
+  margin-top: 5px;
+}
+
+.navbar-hamburger.is-open span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.navbar-hamburger.is-open span:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+.navbar-hamburger.is-open span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* ── Mobile dropdown menu ───────────────────────────────── */
+.navbar-mobile {
+  position: fixed;
+  top: 88px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 999;
+  width: calc(100% - 48px);
+  max-width: 1160px;
+  background: rgba(31, 41, 55, 0.50);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  border-radius: 24px;
+  box-shadow: 0 8px 36px rgba(0, 0, 0, 0.13);
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: max-height 0.38s ease, opacity 0.25s ease;
+
+  /* Hidden on desktop */
+  display: none;
+}
+
+.navbar-mobile.is-open {
+  max-height: 460px;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.navbar-mobile__item {
+  display: block;
+  padding: 14px 26px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.navbar-mobile__item:last-of-type {
+  border-bottom: none;
+}
+
+.navbar-mobile__item:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+}
+
+.navbar-mobile__cta-row {
+  padding: 16px 26px 20px;
+}
+
+/* ─────────────────────────────────────────────────────────
+   Responsive breakpoints
+   ───────────────────────────────────────────────────────── */
+
+@media (max-width: 960px) {
+  .navbar-wrapper {
+    width: calc(100% - 32px);
+  }
+
+  /* Hide desktop menu & CTA inside pill */
+  .navbar-menu,
+  .navbar-actions > .navbar-cta {
+    display: none;
+  }
+
+  /* Show hamburger */
+  .navbar-hamburger {
+    display: flex;
+  }
+
+  /* Show mobile dropdown */
+  .navbar-mobile {
+    display: block;
+    top: 82px;
+    width: calc(100% - 32px);
+  }
+}
+
+@media (max-width: 520px) {
+  .navbar-wrapper {
+    width: calc(100% - 20px);
+    top: 12px;
+  }
+
+  .navbar-pill {
+    padding: 9px 10px 9px 16px;
+  }
+
+  .navbar-mobile {
+    top: 74px;
+    width: calc(100% - 20px);
+  }
+}
+
+/* ─────────────────────────────────────────────────────────
+   Slide-down entrance animation
+   ───────────────────────────────────────────────────────── */
+
+@keyframes navSlideDown {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
