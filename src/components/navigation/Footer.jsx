@@ -1,22 +1,11 @@
+import { useLang } from "../../context/LanguageContext";
 import "./Footer.css";
 
-const LINKS = {
-    Platform: [
-        { label: "Home", href: "#" },
-        { label: "About Us", href: "#" },
-        { label: "Programs", href: "#" },
-    ],
-    Explore: [
-        { label: "Games", href: "#" },
-        { label: "Curriculum", href: "#" },
-        { label: "Community", href: "#" },
-    ],
-    Support: [
-        { label: "Contact", href: "#" },
-        { label: "FAQ", href: "#" },
-        { label: "Privacy Policy", href: "#" },
-    ],
-};
+const LINK_HREFS = [
+    ["#", "#", "#"],
+    ["#", "#", "#"],
+    ["#", "#", "#"],
+];
 
 const SOCIALS = [
     {
@@ -64,6 +53,12 @@ const SOCIALS = [
 
 export default function Footer() {
     const year = new Date().getFullYear();
+    const { t } = useLang();
+    const { footer: ft } = t;
+    const columns = Object.entries(ft.columns).map(([title, labels], ci) => ({
+        title,
+        items: labels.map((label, li) => ({ label, href: LINK_HREFS[ci][li] })),
+    }));
 
     return (
         <footer className="site-footer">
@@ -88,26 +83,24 @@ export default function Footer() {
                         <span className="site-footer__brand-name">EduQuest</span>
                     </div>
 
-                    <p className="site-footer__tagline">
-                        A modern education platform preparing the next generation with the best technology.
-                    </p>
+                    <p className="site-footer__tagline">{ft.tagline}</p>
 
                     {/* Newsletter */}
                     <div className="site-footer__newsletter">
                         <input
                             type="email"
-                            placeholder="Your email..."
+                            placeholder={ft.newsletterPlaceholder}
                             className="site-footer__newsletter-input"
-                            aria-label="Subscribe to newsletter"
+                            aria-label={ft.newsletterAriaLabel}
                         />
                         <button type="button" className="site-footer__newsletter-btn">
-                            Subscribe
+                            {ft.subscribeBtnLabel}
                         </button>
                     </div>
                 </div>
 
                 {/* Link columns */}
-                {Object.entries(LINKS).map(([title, items]) => (
+                {columns.map(({ title, items }) => (
                     <div key={title} className="site-footer__col">
                         <h4 className="site-footer__col-title">{title}</h4>
                         <ul className="site-footer__col-list">
@@ -124,9 +117,7 @@ export default function Footer() {
 
             {/* Bottom bar */}
             <div className="site-footer__bottom">
-                <p className="site-footer__copy">
-                    © {year} EduQuest. All rights reserved.
-                </p>
+                <p className="site-footer__copy">{ft.copyright(year)}</p>
                 <div className="site-footer__socials">
                     {SOCIALS.map(({ label, href, icon }) => (
                         <a key={label} href={href} className="site-footer__social-btn" aria-label={label}>

@@ -102,6 +102,37 @@
   flex-shrink: 0;
 }
 
+/* ── Language toggle ────────────────────────────────────── */
+.navbar-lang-toggle {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 100px;
+  padding: 5px 12px;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.5);
+  letter-spacing: 0.05em;
+  transition: all 0.2s ease;
+}
+
+.navbar-lang-toggle:hover {
+  background: rgba(255, 255, 255, 0.13);
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+.navbar-lang-toggle span.is-active {
+  color: #ffffff;
+}
+
+.navbar-lang-divider {
+  opacity: 0.3;
+}
+
 /* ── CTA Button ─────────────────────────────────────────── */
 .navbar-cta {
   font-family: 'Poppins', sans-serif;

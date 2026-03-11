@@ -1,18 +1,15 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useLang } from "../../context/LanguageContext";
 import "./Header.css";
 
-const MENU_ITEMS = [
-  { label: "Home", href: "/" },
-  { label: "Career Test", href: "#" },
-  { label: "Results", href: "#" },
-  { label: "Roadmap", href: "#" },
-  { label: "About", href: "#" },
-];
+const MENU_HREFS = ["/", "#", "#", "#", "#"];
 
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const { lang, toggle, t } = useLang();
+  const menuItems = t.menu.map((label, i) => ({ label, href: MENU_HREFS[i] }));
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 10);
@@ -42,7 +39,7 @@ export default function Header() {
 
           {/* Desktop navigation */}
           <nav className="navbar-menu" aria-label="Primary navigation">
-            {MENU_ITEMS.map(({ label, href }) => (
+            {menuItems.map(({ label, href }) => (
               <Link key={label} to={href} className="navbar-menu__item">
                 {label}
               </Link>
@@ -51,15 +48,26 @@ export default function Header() {
 
           {/* Right actions */}
           <div className="navbar-actions">
+            <button
+              type="button"
+              className="navbar-lang-toggle"
+              onClick={toggle}
+              aria-label="Switch language"
+            >
+              <span className={lang === "en" ? "is-active" : ""}>EN</span>
+              <span className="navbar-lang-divider">|</span>
+              <span className={lang === "id" ? "is-active" : ""}>ID</span>
+            </button>
+
             <button type="button" className="navbar-cta">
-              Start Quest
+              {t.cta}
             </button>
 
             <button
               type="button"
               className={`navbar-hamburger ${mobileOpen ? "is-open" : ""}`}
               onClick={() => setMobileOpen((p) => !p)}
-              aria-label={mobileOpen ? "Close menu" : "Open menu"}
+              aria-label={mobileOpen ? t.closeMenu : t.openMenu}
               aria-expanded={mobileOpen}
               aria-controls="mobile-nav"
             >
@@ -78,7 +86,7 @@ export default function Header() {
         aria-label="Mobile navigation"
         aria-hidden={!mobileOpen}
       >
-        {MENU_ITEMS.map(({ label, href }) => (
+        {menuItems.map(({ label, href }) => (
           <Link
             key={`mob-${label}`}
             to={href}
@@ -90,7 +98,7 @@ export default function Header() {
         ))}
         <div className="navbar-mobile__cta-row">
           <button type="button" className="navbar-cta" onClick={() => setMobileOpen(false)}>
-            Mulai Quest
+            {t.cta}
           </button>
         </div>
       </nav>
