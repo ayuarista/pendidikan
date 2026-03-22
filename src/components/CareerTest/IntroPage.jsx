@@ -33,7 +33,7 @@ export default function IntroPage({ onStart }) {
         </div>
 
         <div className="text-center mb-10">
-          <h1 className="font-black text-white leading-none mb-4"
+          <h1 className="font-accent font-black text-white leading-none mb-4"
             style={{ fontSize: "clamp(2.4rem, 7vw, 4rem)", letterSpacing: "-0.02em" }}>
             Cari Tahu Karir<br />
             <span className="text-transparent bg-clip-text bg-gradient-to-b from-secondary to-blue-700">Impian Kamu</span>
