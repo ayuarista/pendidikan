@@ -4,13 +4,13 @@
 
 .site-footer {
   position: relative;
-  background: linear-gradient(180deg, #0f0c29 0%, #1a1035 100%);
+  background: linear-gradient(180deg, #1c1207 0%, #2f1b07 100%);
   color: rgba(255, 255, 255, 0.75);
   font-family: 'Poppins', sans-serif;
   overflow: hidden;
 }
 
-/* Subtle purple glow line at very top */
+/* Subtle amber glow line at very top */
 .site-footer__glow {
   position: absolute;
   top: 0;
@@ -21,7 +21,7 @@
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(139, 92, 246, 0.6),
+    rgba(251, 191, 36, 0.65),
     transparent
   );
 }
@@ -90,13 +90,13 @@
 }
 
 .site-footer__newsletter-input:focus {
-  border-color: rgba(139, 92, 246, 0.6);
+  border-color: rgba(251, 191, 36, 0.7);
   background: rgba(255, 255, 255, 0.10);
 }
 
 .site-footer__newsletter-btn {
   flex-shrink: 0;
-  background: linear-gradient(135deg, #6d28d9, #8b5cf6);
+  background: linear-gradient(135deg, #ea580c, #f59e0b);
   color: #fff;
   border: none;
   border-radius: 100px;
@@ -109,9 +109,9 @@
 }
 
 .site-footer__newsletter-btn:hover {
-  background: linear-gradient(135deg, #5b21b6, #7c3aed);
+  background: linear-gradient(135deg, #c2410c, #d97706);
   transform: translateY(-1px);
-  box-shadow: 0 4px 14px rgba(109, 40, 217, 0.45);
+  box-shadow: 0 4px 14px rgba(234, 88, 12, 0.42);
 }
 
 /* ── Link columns ───────────────────────────────────────── */
@@ -190,8 +190,8 @@
 }
 
 .site-footer__social-btn:hover {
-  background: rgba(139, 92, 246, 0.25);
-  border-color: rgba(139, 92, 246, 0.5);
+  background: rgba(245, 158, 11, 0.26);
+  border-color: rgba(251, 191, 36, 0.58);
   color: #ffffff;
   transform: translateY(-2px);
 }

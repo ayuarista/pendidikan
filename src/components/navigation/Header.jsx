@@ -4,7 +4,13 @@ import { useLang } from "../../context/LanguageContext";
 import "./Header.css";
 import ThemeToggle from "../ui/ThemeToggle";
 
-const MENU_HREFS = ["/", "#", "#", "#", "#"];
+const MENU_HREFS = [
+  "/",
+  "/ai-career-test",
+  "/career-compare",
+  "/explore-career",
+  "/explore-education",
+];
 
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -31,8 +37,8 @@ export default function Header() {
               <path d="M17.6 7L9 18h7l-1.6 7L23 16h-7l1.6-9Z" fill="#fff" />
               <defs>
                 <linearGradient id="lg" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
-                  <stop stopColor="#6d28d9" />
-                  <stop offset="1" stopColor="#8b5cf6" />
+                  <stop stopColor="#ea580c" />
+                  <stop offset="1" stopColor="#f59e0b" />
                 </linearGradient>
               </defs>
             </svg>
@@ -46,7 +52,7 @@ export default function Header() {
               </Link>
             ))}
           </nav>
-          <ThemeToggle/>
+          <ThemeToggle />
 
           {/* Right actions */}
           <div className="navbar-actions">
@@ -61,9 +67,9 @@ export default function Header() {
               <span className={lang === "id" ? "is-active" : ""}>ID</span>
             </button>
 
-            <button type="button" className="navbar-cta">
+            <Link to="/ai-career-test" className="navbar-cta">
               {t.cta}
-            </button>
+            </Link>
 
             <button
               type="button"
@@ -99,9 +105,9 @@ export default function Header() {
           </Link>
         ))}
         <div className="navbar-mobile__cta-row">
-          <button type="button" className="navbar-cta" onClick={() => setMobileOpen(false)}>
+          <Link to="/ai-career-test" className="navbar-cta" onClick={() => setMobileOpen(false)}>
             {t.cta}
-          </button>
+          </Link>
         </div>
       </nav>
     </>

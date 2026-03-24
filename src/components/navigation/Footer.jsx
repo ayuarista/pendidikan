@@ -1,10 +1,11 @@
+import { Link } from "react-router-dom";
 import { useLang } from "../../context/LanguageContext";
 import "./Footer.css";
 
 const LINK_HREFS = [
-    ["#", "#", "#"],
-    ["#", "#", "#"],
-    ["#", "#", "#"],
+    ["/", "/ai-career-test", "/career-compare"],
+    ["/explore-career", "/explore-education", "/ai-career-test"],
+    ["/explore-career", "/explore-education", "/"],
 ];
 
 const SOCIALS = [
@@ -75,8 +76,8 @@ export default function Footer() {
                             <path d="M17.6 7L9 18h7l-1.6 7L23 16h-7l1.6-9Z" fill="#fff" />
                             <defs>
                                 <linearGradient id="flg" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
-                                    <stop stopColor="#6d28d9" />
-                                    <stop offset="1" stopColor="#8b5cf6" />
+                                    <stop stopColor="#ea580c" />
+                                    <stop offset="1" stopColor="#f59e0b" />
                                 </linearGradient>
                             </defs>
                         </svg>
@@ -106,7 +107,7 @@ export default function Footer() {
                         <ul className="site-footer__col-list">
                             {items.map(({ label, href }) => (
                                 <li key={label}>
-                                    <a href={href} className="site-footer__col-link">{label}</a>
+                                    <Link to={href} className="site-footer__col-link">{label}</Link>
                                 </li>
                             ))}
                         </ul>

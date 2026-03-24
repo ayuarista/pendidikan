@@ -2,7 +2,7 @@ import { createContext, useContext, useState } from "react";
 
 const translations = {
     en: {
-        menu: ["Home", "Career Test", "Results", "Roadmap", "About"],
+        menu: ["Home", "AI Career Test", "Career Compare", "Explore Career", "Explore Education"],
         cta: "Start Quest",
         openMenu: "Open menu",
         closeMenu: "Close menu",
@@ -12,15 +12,15 @@ const translations = {
             newsletterAriaLabel: "Subscribe to newsletter",
             subscribeBtnLabel: "Subscribe",
             columns: {
-                Platform: ["Home", "About Us", "Programs"],
-                Explore: ["Games", "Curriculum", "Community"],
-                Support: ["Contact", "FAQ", "Privacy Policy"],
+                Platform: ["Home", "AI Career Test", "Career Compare"],
+                Explore: ["Explore Career", "Explore Education", "Start Quest"],
+                Support: ["Career Paths", "Majors", "Back to Home"],
             },
             copyright: (year) => `© ${year} EduQuest. All rights reserved.`,
         },
     },
     id: {
-        menu: ["Beranda", "Tes Karir", "Hasil", "Peta Jalan", "Tentang"],
+        menu: ["Beranda", "Tes Karir AI", "Bandingkan Karir", "Jelajahi Karir", "Jelajahi Edukasi"],
         cta: "Mulai Quest",
         openMenu: "Buka menu",
         closeMenu: "Tutup menu",
@@ -30,9 +30,9 @@ const translations = {
             newsletterAriaLabel: "Daftar newsletter",
             subscribeBtnLabel: "Daftar",
             columns: {
-                Platform: ["Beranda", "Tentang Kami", "Program"],
-                Jelajahi: ["Games", "Kurikulum", "Komunitas"],
-                Dukungan: ["Kontak", "FAQ", "Kebijakan Privasi"],
+                Platform: ["Beranda", "Tes Karir AI", "Bandingkan Karir"],
+                Jelajahi: ["Jelajahi Karir", "Jelajahi Edukasi", "Mulai Quest"],
+                Dukungan: ["Jalur Karir", "Jurusan", "Kembali ke Beranda"],
             },
             copyright: (year) => `© ${year} EduQuest. Semua hak dilindungi.`,
         },

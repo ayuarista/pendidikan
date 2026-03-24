@@ -11,6 +11,7 @@ import ExploreCareer from "./pages/ExploreCareer"
 import CareerDetailPage from "./pages/CareerDetailPage"
 import ExploreEducation from "./pages/ExploreEducation"
 import EducationDetailPage from "./pages/EducationDetailPage"
+import ScrollToTopButton from "./components/ui/ScrollToTopButton"
 
 export default function App() {
   return (
@@ -30,6 +31,7 @@ export default function App() {
           <Route path="*" element={<PagesNotFound />} />
         </Routes>
         <Footer />
+        <ScrollToTopButton />
       </Router>
     </LanguageProvider>
   )
