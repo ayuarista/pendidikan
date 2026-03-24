@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useLang } from "../../context/LanguageContext";
 import "./Header.css";
+import ThemeToggle from "../ui/ThemeToggle";
 
 const MENU_HREFS = ["/", "#", "#", "#", "#"];
 
@@ -45,6 +46,7 @@ export default function Header() {
               </Link>
             ))}
           </nav>
+          <ThemeToggle/>
 
           {/* Right actions */}
           <div className="navbar-actions">

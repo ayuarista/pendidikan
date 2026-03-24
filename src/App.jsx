@@ -7,6 +7,10 @@ import AICareerTest from "./pages/AICareerTest"
 import CareerCompare from "./pages/CareerCompare"
 import PagesNotFound from "./pages/PagesNotFound"
 import Footer from "./components/navigation/Footer"
+import ExploreCareer from "./pages/ExploreCareer"
+import CareerDetailPage from "./pages/CareerDetailPage"
+import ExploreEducation from "./pages/ExploreEducation"
+import EducationDetailPage from "./pages/EducationDetailPage"
 
 export default function App() {
   return (
@@ -18,11 +22,15 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/ai-career-test" element={<AICareerTest />} />
           <Route path="/career-compare" element={<CareerCompare />} />
-          {/* <Route path="/career/:id" element={<CareerResultPage />} /> */}
+          <Route path="/explore-career" element={<ExploreCareer />} />
+          <Route path="/explore-education" element={<ExploreEducation />} />
+          <Route path="/education/:slug" element={<EducationDetailPage />} />
+          <Route path="/career/:slug" element={<CareerDetailPage />} />
+
           <Route path="*" element={<PagesNotFound />} />
         </Routes>
         <Footer />
       </Router>
     </LanguageProvider>
-      )
+  )
 }

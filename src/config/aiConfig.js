@@ -233,16 +233,15 @@ FORMAT JSON WAJIB:
   "skillGaps": [
     {
       "skill": "Nama Skill",
-      "currentLevel": "Pemula/Menengah/Mahir",
-      "targetLevel": "Menengah/Mahir/Expert",
-      "howToLearn": "Cara belajar skill ini (1 kalimat)"
+      "targetLevel": "Penting/Cukup",
+      "howToLearn": "Bagaimana cara belajar/mengembangkan skill ini (contoh: kursus online, magang, proyek pribadi, dll)"
     }
   ],
   "umkmOpportunities": [
     {
       "sector": "Sektor UMKM",
       "description": "Peluang spesifik di sektor ini",
-      "startupIdea": "Ide usaha yang bisa dimulai"
+      "startupIdea": "Ide usaha yang bisa dimulai dengan skill dan minat dia"
     }
   ],
 
@@ -251,7 +250,7 @@ FORMAT JSON WAJIB:
 
 PENTING:
 - topCareers HARUS 3
-- recommendedMajors HARUS 3
+- recommendedMajors HARUS 2
 - skillGaps HARUS 4
 - Universitas harus 2 per jurusan
 - umkmOpportunities HARUS 2
