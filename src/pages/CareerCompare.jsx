@@ -162,14 +162,9 @@ export default function CareerCompare() {
 
         {/* Header */}
         <div className="text-center mb-12">
-          <h1
-            className="font-bold tracking-tight mb-3 font-accent text-neutral-900 dark:text-white"
-            style={{ fontSize: "clamp(1.25rem, 5vw, 3rem)", letterSpacing: "-0.025em" }}
-          >
-            Perbandingan Karir
-          </h1>
+          <h1 className={`text-4xl font-accent font-black mb-3 ${isDark ? "text-white" : "text-neutral-900"}`}>Perbandingan Karir</h1>
           <p className={`max-w-lg text-sm sm:text-[15px] mx-auto ${isDark ? "text-zinc-400" : "text-neutral-500"}`}>
-        Analisis mendalam untuk membantu Anda memahami potensi dan memilih jalur karir yang tepat.
+            Analisis mendalam untuk membantu Anda memilih jalur karir yang tepat.
           </p>
         </div>
 

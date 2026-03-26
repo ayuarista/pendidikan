@@ -16,7 +16,7 @@ const MENU_HREFS = [
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const { lang, toggle, t } = useLang();
+  const { t } = useLang();
   const menuItems = t.menu.map((label, i) => ({ label, href: MENU_HREFS[i] }));
 
   useEffect(() => {
@@ -63,16 +63,6 @@ export default function Header() {
 
           {/* Right actions */}
           <div className="navbar-actions">
-            <button
-              type="button"
-              className="navbar-lang-toggle"
-              onClick={toggle}
-              aria-label="Switch language"
-            >
-              <span className={lang === "en" ? "is-active" : ""}>EN</span>
-              <span className="navbar-lang-divider">|</span>
-              <span className={lang === "id" ? "is-active" : ""}>ID</span>
-            </button>
             <ThemeToggle />
 
             <Link to="/ai-career-test" className="navbar-cta">

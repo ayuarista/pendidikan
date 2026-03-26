@@ -24,27 +24,25 @@ export default function WhyCareer() {
 		<section className="relative px-4 py-8">
 			<div className="relative z-1 mx-auto w-full max-w-6xl">
 				<div className="text-center">
-					<span data-aos="fade-up" className="inline-block rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-neutral-400 dark:text-white/25">
+					<span className="inline-block rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-neutral-400 dark:text-white/25">
 						Mengapa CareerAI?
 					</span>
-					<h2 data-aos="fade-up" data-aos-delay="80" className="mt-3 text-2xl font-bold tracking-tight text-slate-900 dark:text-white md:text-3xl">
+					<h2 className="mt-3 text-2xl font-bold tracking-tight text-slate-900 dark:text-white md:text-3xl">
 						Masalah yang Dihadapi Siswa
 						<span className="block text-slate-900 dark:text-white">
 							dan Bagaimana Kami Menyelesaikannya
 						</span>
 					</h2>
-					<p data-aos="fade-up" data-aos-delay="130" className="mx-auto mt-3 max-w-3xl text-sm leading-7 text-slate-600 dark:text-white/72 md:text-base">
+					<p className="mx-auto mt-3 max-w-3xl text-sm leading-7 text-slate-600 dark:text-white/72 md:text-base">
 						CareerAI memberi panduan berbasis data agar Anda tahu langkah berikutnya.
 
 					</p>
 				</div>
 
 				<div className="mt-6 grid grid-cols-1 gap-3 md:grid-cols-3">
-					{WHY_CARDS.map(({ title, category, desc, img }, index) => (
+					{WHY_CARDS.map(({ title, category, desc, img }) => (
 						<article
 							key={title}
-							data-aos="fade-up"
-							data-aos-delay={120 + index * 70}
 							className="group overflow-hidden rounded-2xl bg-white p-5 backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:bg-slate-50 dark:bg-white/5 dark:hover:bg-white/10"
 						>
 							<img
