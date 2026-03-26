@@ -101,7 +101,7 @@ export default function EducationDetailPage({ major: majorProp, onBack }) {
                 hover:bg-neutral-200 dark:hover:bg-white/[0.09]
                 hover:text-neutral-900 dark:hover:text-white"
             >
-              
+
               <HiArrowLeft className="size-4" />
               Kembali
             </button>
@@ -211,9 +211,6 @@ export default function EducationDetailPage({ major: majorProp, onBack }) {
                 </span>
               </div>
             )}
-            <span className="inline-flex items-center text-[11px] font-semibold px-2.5 py-1 rounded-lg bg-neutral-100 dark:bg-white/[0.06] text-neutral-500 dark:text-white/40">
-              {d.duration}
-            </span>
             {d.salaryRange && (
               <span
                 className="inline-flex items-center text-[11px] font-semibold px-2.5 py-1 rounded-lg"
