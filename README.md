@@ -1,46 +1,45 @@
 # Edutech 
 
-A web application designed to help students discover their ideal career paths based on personality analysis powered by AI.
+Aplikasi web yang dirancang untuk membantu siswa menemukan jalur karir ideal mereka berdasarkan analisis kepribadian yang didukung oleh AI.
 
-## ✨ Features
+## ✨ Fitur
 
--   **Personality Assessment**: Interactive quiz to map user personality traits.
--   **AI-Powered Analysis**: Utilizes Groq (Llama 3) for fast and deep career matching.
--   **Comprehensive Results**: Detailed breakdown of career recommendations, skill gaps, and university majors.
--   **PDF Export**: Downloadable detailed report generated.
--   **Responsive Design**: Fully responsive UI built with Tailwind CSS.
+-   **Asesmen Kepribadian**: Kuis interaktif untuk memetakan sifat kepribadian pengguna.
+-   **Analisis Berbasis AI**: Menggunakan Groq (Llama 3) untuk pencocokan karir yang cepat dan mendalam.
+-   **Hasil Lengkap**: Rincian rekomendasi karir, Skill yang perlu diasah, contoh Bisnis UMKM yang bisa di buat, dan jurusan universitas.
+-   **Hasil analisis**: Laporan analisis yang dapat diunduh.
+-   **Desain Responsif**: Tampilan yang sepenuhnya responsif dibangun dengan Tailwind CSS.
 
-## 🛠 Tech Stack
+## 🛠 Teknologi yang Digunakan
 
 -   **Frontend**: React.js, Vite
 -   **Styling**: Tailwind CSS
--   **AI Engine**: Groq API (llama-3.1-8b-instant)
+-   **Bantuan analisis dari AI**: Groq API (llama-3.1-8b-instant)
 
-## 🚀 Getting Started
+## 🚀 Start
 
-### Prerequisites
+### Prasyarat
 
--   Node.js (v18 or higher)
--   npm or yarn
--   Groq API Key
+-   Node.js (v18 atau lebih tinggi)
+-   npm atau yarn
 
-### Installation
+### Instalasi
 
-1.  Install dependencies:
+1.  Instal dependensi:
     ```bash
     npm install
     ```
-2.  Run the development server:
+2.  Jalankan server pengembangan:
     ```bash
     npm run dev
     ```
 
-## 🤖 AI Integration (Groq)
+## 🤖 Integrasi AI (Groq)
 
-This application uses the **Groq API** to generate career recommendations.
+Aplikasi ini menggunakan **Groq API** untuk menghasilkan rekomendasi karir.
 
-1.  **Prompt Engineering**: User answers are compiled into a structured prompt asking for career matches, skill analysis, and study recommendations in JSON format.
-2.  **API Call**: The frontend sends a request to the Groq API endpoint (chat/completions) using the `Llama-3.1-70b-versatile` model for low-latency responses.
-3.  **Response Parsing**: The raw text response from the AI is parsed into a JSON object to populate the `ResultPage` dynamically.
+1.  **Prompt untuk menganalisa**: Jawaban pengguna dikompilasi menjadi prompt terstruktur yang meminta rekomendasi karir, analisis keterampilan, dan saran studi dalam format JSON.
+2.  **Groq API**: Frontend mengirimkan permintaan ke endpoint Groq API (chat/completions) menggunakan model `Llama-3.1-70b-versatile` untuk respons dengan latensi rendah.
+3.  **Parsing Respons**: Respons teks mentah dari AI diurai menjadi objek JSON untuk mengisi `ResultPage` secara dinamis.
 
-Made with ❤️ by Jujur bingung Team
+Dibuat dengan ❤️ oleh Jujur Bingung team!
