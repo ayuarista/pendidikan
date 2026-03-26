@@ -94,7 +94,7 @@ export default function PDFResult({ result }) {
                 )}
                 {c.industryDemand && (
                   <span style={{ fontSize: "11px", color: "#6b7280", background: "#f3f4f6", padding: "2px 10px", borderRadius: "6px" }}>
-                    Permintaan pasar: {c.industryDemand}
+                    Prospek kerja: {c.industryDemand}
                   </span>
                 )}
               </div>

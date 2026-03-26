@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import IntroPage from "../components/CareerTest/IntroPage";
 import TestPage from "../components/CareerTest/TestPage";
 import LoadingPage from "../components/CareerTest/LoadingPage";
@@ -7,6 +7,9 @@ import { QUESTIONS, buildAnalysisPrompt } from "../config/aiConfig";
 import { analyzeCareerWithAI } from "../services/openRouterService";
 
 export default function AICareerTest() {
+    useEffect(() => {
+    document.title = "Edutech - AI Career Analysis";
+  }, []);
   const [step, setStep] = useState("intro"); 
   const [answers, setAnswers] = useState({});
   const [result, setResult] = useState(null);
