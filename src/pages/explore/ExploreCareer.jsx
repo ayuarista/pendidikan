@@ -6,30 +6,6 @@ import {
   HiCurrencyDollar, HiLightningBolt,
 } from "react-icons/hi";
 
-const BG = {
-  page: "#0a0a0b",
-  s1: "#111116",
-  s2: "#141418",
-  s3: "#1a1a1f",
-  hi: "#f9fafb",
-  md: "#9ca3af",
-  lo: "#6b7280",
-  faint: "#4b5563",
-  rule: "rgba(255,255,255,0.06)",
-};
-
-const LIGHT_BG = {
-  page: "#fafafa",
-  s1: "#ffffff",
-  s2: "rgba(243, 244, 246, 0.6)",
-  s3: "#f5f5f5",
-  hi: "#0f172a",
-  md: "#737373",
-  lo: "#737373",
-  faint: "#a3a3a3",
-  rule: "transparent",
-};
-
 const DEMAND_META = {
   "Sangat Tinggi": { color: "#6ee7b7", bg: "rgba(110, 231, 183, 0.08)" },
   "Tinggi": { color: "#93c5fd", bg: "rgba(147, 197, 253, 0.08)" },
@@ -43,99 +19,73 @@ const ENTRY_META = {
   "Tinggi": { color: "#f87171" },
 };
 
-function CareerCard({ career, onClick, palette, isDark }) {
+function CareerCard({ career, onClick, style }) {
   const demand = DEMAND_META[career.demand] || DEMAND_META["Sedang"];
-  const entry = ENTRY_META[career.entryLevel] || { color: BG.md };
+  const entry = ENTRY_META[career.entryLevel] || { color: "#9ca3af" };
 
   return (
     <button
       onClick={() => onClick(career.slug)}
-      className={`group text-left w-full transition-all duration-200 rounded-xl overflow-hidden ${isDark ? "border" : ""}`}
-      style={{ background: palette.s2, borderColor: palette.rule }}
-      onMouseEnter={e => {
-        e.currentTarget.style.background = palette.s3;
-        e.currentTarget.style.borderColor = isDark ? "rgba(255,255,255,0.1)" : "transparent";
-      }}
-      onMouseLeave={e => {
-        e.currentTarget.style.background = palette.s2;
-        e.currentTarget.style.borderColor = palette.rule;
-      }}
+      style={style}
+      className="group text-left w-full rounded-2xl p-5 transition-colors duration-200
+        bg-gray-100/60 hover:bg-white/6
+        dark:bg-neutral-800/55 dark:hover:bg-white/6
+        light:bg-neutral-100/60 light:hover:bg-neutral-100"
     >
-      <div className="p-5 flex flex-col h-full">
-        {/* Header */}
-        <div className="flex items-start justify-between gap-3 mb-3">
-          <div className="min-w-0">
-            {/* Field label diatas judul, warna netral */}
-            <p className={`text-[10px] font-bold uppercase tracking-widest mb-1.5 ${isDark ? "text-gray-500" : "text-neutral-400"}`}>
-              {career.field}
-            </p>
-            <h3 className={`font-semibold text-base leading-snug ${isDark ? "text-white" : "text-neutral-900"}`}>
-              {career.title}
-            </h3>
-          </div>
-          {/* Arrow icon netral */}
-          <div className={`shrink-0 w-8 h-8 rounded-lg flex items-center justify-center transition-all duration-200 ${isDark ? "bg-white/5 group-hover:bg-white/10" : "bg-neutral-100 group-hover:bg-white"}`}>
-            <HiArrowRight className={`w-3.5 h-3.5 transition-colors ${isDark ? "text-gray-400 group-hover:text-white" : "text-neutral-300 group-hover:text-neutral-500"}`} />
-          </div>
-        </div>
-
-        {/* Deskripsi singkat */}
-        <p className={`text-xs leading-relaxed mb-4 grow ${isDark ? "text-gray-500" : "text-neutral-500"}`}>
-          {career.shortDesc}
+      <div className="flex items-start justify-between mb-3">
+        <span className="text-[10px] font-bold uppercase tracking-wider bg-violet-100 dark:bg-violet-500/20 px-2 py-1 text-violet-600 dark:text-violet-300 rounded-md">
+          {career.category === "teknologi" ? "Teknologi"
+            : career.category === "bisnis" ? "Bisnis"
+              : career.category === "kreatif" ? "Kreatif"
+                : career.category === "sosial" ? "Sosial"
+                  : career.category === "kesehatan" ? "Kesehatan"
+                    : "Lainnya"}
+        </span>
+        <p className="text-[11px] font-medium text-neutral-400/70 dark:text-white/50 ml-2">
+          {career.field}
         </p>
+      </div>
 
-        {/* Separator line */}
-        <div className={`pt-3 mt-auto space-y-2.5 ${isDark ? "border-t border-white/5" : ""}`}>
+      <h3 className="text-sm font-semibold leading-snug mb-2 text-neutral-900 dark:text-white">
+        {career.title}
+      </h3>
 
-          {/* Gaji - Clean look */}
-          <div className="flex items-center gap-2">
-            <HiCurrencyDollar className={`w-3.5 h-3.5 ${isDark ? "text-gray-600" : "text-neutral-400"}`} />
-            <span className={`text-xs font-medium ${isDark ? "text-gray-400" : "text-neutral-500"}`}>{career.salary}</span>
-          </div>
+      <p className="text-xs leading-relaxed mb-4 line-clamp-2 text-neutral-500 dark:text-white/30">
+        {career.shortDesc}
+      </p>
 
-          {/* Demand - Subtle badge */}
-          <div className="flex items-center gap-2">
-            <HiTrendingUp className={`w-3.5 h-3.5 ${isDark ? "text-gray-600" : "text-neutral-400"}`} />
-            <span className="text-[11px] font-medium px-2 py-0.5 rounded-md"
-              style={{ color: demand.color, background: demand.bg }}>
-              {career.demand}
-            </span>
-          </div>
-
-          {/* Entry Level - Minimalist text */}
-          <div className="flex items-center gap-2">
-            <HiLightningBolt className={`w-3.5 h-3.5 ${isDark ? "text-gray-600" : "text-neutral-400"}`} />
-            <span className={`text-xs ${isDark ? "text-gray-500" : "text-neutral-500"}`}>
-              Hambatan masuk:{" "}
-              <span className="font-medium" style={{ color: entry.color }}>
-                {career.entryLevel}
-              </span>
-            </span>
-          </div>
+      <div className="flex items-center justify-between">
+        <div className="inline-flex text-[11px] items-center gap-1">
+          <HiTrendingUp className="size-3.5 text-neutral-400 dark:text-neutral-300" />
+          <span className="font-semibold px-2 py-0.5 rounded-md" style={{ color: demand.color, background: demand.bg }}>
+            {career.demand}
+          </span>
         </div>
+
+        <div className="flex items-center gap-2">
+          <HiCurrencyDollar className="size-3.5 text-neutral-400 dark:text-neutral-300" />
+          <span className="text-[11px] text-neutral-500 dark:text-white/35">{career.salary}</span>
+          <HiLightningBolt className="size-3.5 text-neutral-400 dark:text-neutral-300 ml-1" />
+          <span className="text-[11px]" style={{ color: entry.color }}>
+            {career.entryLevel}
+          </span>
+        </div>
+
+        <HiArrowRight
+          className="size-3.5 text-neutral-300 dark:text-white/20
+            transition-transform duration-200 group-hover:translate-x-0.5 group-hover:text-neutral-500 dark:group-hover:text-white/50"
+        />
       </div>
     </button>
   );
 }
 
 export default function ExploreCareer() {
-  const [isDark, setIsDark] = useState(() => document.documentElement.classList.contains("dark"));
-
   useEffect(() => {
     document.title = "Edutech - Explore Career";
   }, []);
 
-  useEffect(() => {
-    const root = document.documentElement;
-    const observer = new MutationObserver(() => {
-      setIsDark(root.classList.contains("dark"));
-    });
-    observer.observe(root, { attributes: true, attributeFilter: ["class"] });
-    return () => observer.disconnect();
-  }, []);
-
-  const palette = isDark ?            Jelajahi Karir
-igate = useNavigate();
+  const navigate = useNavigate();
   const [query, setQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState("all");
 
@@ -156,84 +106,85 @@ igate = useNavigate();
   };
 
   return (
-    <div className="min-h-screen pb-24 px-4 pt-28 transition-colors duration-300" style={{ background: palette.page }}>
+    <div className="min-h-screen pb-24 px-4 pt-28 bg-neutral-50 dark:bg-background text-neutral-900 dark:text-white">
       <style>{`
-        @keyframes fadeUp { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
-        .fu { animation: fadeUp .4s ease both; }
+        @keyframes fadeUp { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:translateY(0); } }
+        .fu  { animation: fadeUp .4s ease both; }
+        .fu1 { animation: fadeUp .4s .05s ease both; }
+        .fu2 { animation: fadeUp .4s .10s ease both; }
+        .fu3 { animation: fadeUp .4s .15s ease both; }
       `}</style>
 
-      <div className="max-w-5xl mx-auto">
+      <div className="max-w-6xl mx-auto">
 
-        {/* ── HEADER ── */}
+        {/* ── Header ── */}
         <div className="mb-10 fu">
-          <p className={`text-[10px] font-bold uppercase tracking-[0.14em] mb-3 ${isDark ? "text-gray-600" : "text-neutral-400"}`}>
+          <p className="text-[10px] font-bold uppercase tracking-[0.14em] mb-3 text-neutral-400 dark:text-white/25">
             Eksplorasi Karir
           </p>
-          <h1 className={`${isDark ? "text-white" : "text-neutral-900"} font-bold tracking-tight mb-3`}
-            style={{ fontSize: "clamp(1.75rem,5vw,2.5rem)", letterSpacing: "-0.025em" }}>
-            Explore Career
+          <h1
+            className="font-bold tracking-tight mb-3 font-accent text-neutral-900 dark:text-white"
+            style={{ fontSize: "clamp(1.25rem,5vw,3rem)", letterSpacing: "-0.025em" }}
+          >
+            Jelajahi Karir
           </h1>
-          <p className={`text-sm leading-relaxed max-w-lg ${isDark ? "text-gray-500" : "text-neutral-500"}`}>
+          <p className="text-sm leading-relaxed max-w-lg text-neutral-500 dark:text-white/35">
             Jelajahi berbagai pilihan karir secara bebas — tanpa harus ikut tes dulu.
             Temukan profesi yang sesuai dengan minat Anda.
           </p>
         </div>
 
-        {/* ── SEARCH ── */}
-        <div className="mb-5 fu" style={{ animationDelay: ".05s" }}>
-          <div className="relative">
-            <HiSearch className={`absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 ${isDark ? "text-gray-600" : "text-neutral-400"}`} />
-            <input
-              type="text"
-              placeholder="Cari profesi atau kata kunci..."
-              value={query}
-              onChange={e => setQuery(e.target.value)}
-              className={`w-full pl-11 pr-10 py-3.5 rounded-xl text-sm outline-none transition-all ${isDark ? "border" : ""}`}
-              style={{
-                background: palette.s1,
-                color: palette.hi,
-                caretColor: isDark ? "#ffffff" : "#0f172a",
-                borderColor: isDark ? "rgba(255,255,255,0.06)" : "transparent",
-              }}
-              onFocus={e => e.target.style.borderColor = isDark ? "rgba(255,255,255,0.15)" : "transparent"}
-              onBlur={e => e.target.style.borderColor = isDark ? "rgba(255,255,255,0.06)" : "transparent"}
-            />
-            {query && (
-              <button onClick={() => setQuery("")}
-                className="absolute right-4 top-1/2 -translate-y-1/2">
-                <HiX className={`w-4 h-4 transition-colors ${isDark ? "text-gray-500 hover:text-white" : "text-neutral-400 hover:text-neutral-700"}`} />
-              </button>
-            )}
-          </div>
-        </div>
-
-        {/* ── FILTER KATEGORI ── */}
-        <div className="flex flex-wrap gap-2 mb-8 fu" style={{ animationDelay: ".1s" }}>
-          {CATEGORIES.map(cat => (
+        {/* ── Search ── */}
+        <div className="relative mb-4 fu1">
+          <HiSearch className="absolute left-4 top-1/2 -translate-y-1/2 size-4 text-neutral-400 dark:text-white/25" />
+          <input
+            type="text"
+            placeholder="Cari profesi atau kata kunci..."
+            value={query}
+            onChange={e => setQuery(e.target.value)}
+            className="w-full pl-11 pr-10 py-3.5 rounded-xl text-sm outline-none
+              bg-white dark:bg-white/4
+              text-neutral-900 dark:text-white
+              placeholder:text-neutral-400 dark:placeholder:text-white/25
+              transition-all"
+          />
+          {query && (
             <button
-              key={cat.id}
-              onClick={() => setActiveCategory(cat.id)}
-              className="text-xs font-medium px-4 py-2 rounded-lg transition-all duration-150"
-              style={{
-                background: activeCategory === cat.id
-                  ? (isDark ? "#ffffff" : "#171717")
-                  : palette.s2,
-                color: activeCategory === cat.id
-                  ? (isDark ? "#000000" : "#ffffff")
-                  : palette.lo,
-              }}
+              onClick={() => setQuery("")}
+              className="absolute right-4 top-1/2 -translate-y-1/2 text-neutral-400 dark:text-white/25"
             >
-              {cat.label}
+              <HiX className="size-4" />
             </button>
-          ))}
+          )}
         </div>
 
-        {/* ── RESULT COUNT ── */}
-        <p className={`text-xs mb-5 fu ${isDark ? "text-gray-600" : "text-neutral-400"}`} style={{ animationDelay: ".12s" }}>
+        {/* ── Category filter ── */}
+        <div className="flex flex-wrap gap-2 mb-8 fu2">
+          {CATEGORIES.map(cat => {
+            const active = activeCategory === cat.id;
+            return (
+              <button
+                key={cat.id}
+                onClick={() => setActiveCategory(cat.id)}
+                className={`text-xs font-semibold px-4 py-2 rounded-lg transition-all duration-150 cursor-pointer ${active
+                  ? "bg-neutral-900 dark:bg-white text-white dark:text-neutral-900"
+                  : "bg-neutral-100 dark:bg-white/5 text-neutral-500 dark:text-white/35 hover:bg-neutral-200 dark:hover:bg-white/8"
+                  }`}
+              >
+                {cat.label}
+              </button>
+            );
+          })}
+        </div>
+
+        {/* ── Count ── */}
+        <p className="text-xs mb-5 fu3 text-neutral-400 dark:text-white/25">
           {filtered.length} profesi ditemukan
-          {query && <span> untuk "<span className={isDark ? "text-gray-400" : "text-neutral-600"}>{query}</span>"</span>}
+          {query && (
+            <> untuk "<span className="text-neutral-600 dark:text-white/45">{query}</span>"</>
+          )}
           {activeCategory !== "all" && (
-            <span> di kategori <span className={isDark ? "text-gray-400" : "text-neutral-600"}>
+            <span> di kategori <span className="text-neutral-600 dark:text-white/45">
               {CATEGORIES.find(c => c.id === activeCategory)?.label}
             </span></span>
           )}
@@ -241,23 +192,25 @@ igate = useNavigate();
 
         {/* ── GRID ── */}
         {filtered.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {filtered.map((career, i) => (
-              <div key={career.slug}
-                style={{ animation: `fadeUp .4s ease ${Math.min(i * 0.04, 0.3)}s both` }}>
-                <CareerCard career={career} onClick={handleCardClick} palette={palette} isDark={isDark} />
-              </div>
+              <CareerCard
+                key={career.slug}
+                career={career}
+                onClick={handleCardClick}
+                style={{ animation: `fadeUp .4s ease ${Math.min(i * 0.04, 0.24)}s both` }}
+              />
             ))}
           </div>
         ) : (
           <div className="text-center py-20">
-            <div className={`w-12 h-12 rounded-2xl mx-auto mb-4 flex items-center justify-center ${isDark ? "bg-white/5" : "bg-white"}`}>
-              <HiSearch className={`w-5 h-5 ${isDark ? "text-gray-600" : "text-neutral-300"}`} />
+            <div className="size-12 rounded-2xl mx-auto mb-4 flex items-center justify-center bg-white dark:bg-white/4">
+              <HiSearch className="size-5 text-neutral-300 dark:text-white/15" />
             </div>
-            <p className={`text-sm font-semibold mb-1 ${isDark ? "text-white" : "text-neutral-900"}`}>
+            <p className="text-sm font-semibold mb-1 text-neutral-900 dark:text-white">
               Profesi tidak ditemukan
             </p>
-            <p className={`text-xs ${isDark ? "text-gray-500" : "text-neutral-400"}`}>
+            <p className="text-xs text-neutral-400 dark:text-white/25">
               Coba kata kunci lain atau pilih kategori yang berbeda
             </p>
           </div>
