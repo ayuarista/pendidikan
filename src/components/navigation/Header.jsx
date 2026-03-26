@@ -37,8 +37,8 @@ export default function Header() {
               <path d="M17.6 7L9 18h7l-1.6 7L23 16h-7l1.6-9Z" fill="#fff" />
               <defs>
                 <linearGradient id="lg" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
-                  <stop stopColor="#ea580c" />
-                  <stop offset="1" stopColor="#f59e0b" />
+                  <stop stopColor="#7c3aed" />
+                  <stop offset="1" stopColor="#a855f7" />
                 </linearGradient>
               </defs>
             </svg>
