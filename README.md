@@ -30,14 +30,7 @@ A web application designed to help students discover their ideal career paths ba
     ```bash
     npm install
     ```
-
-2.  Set up environment variables:
-    Create a `.env` file in the root directory.
-    ```env
-    VITE_GROQ_API_KEY=your_groq_api_key_here
-    ```
-
-3.  Run the development server:
+2.  Run the development server:
     ```bash
     npm run dev
     ```
@@ -50,7 +43,4 @@ This application uses the **Groq API** to generate career recommendations.
 2.  **API Call**: The frontend sends a request to the Groq API endpoint (chat/completions) using the `Llama-3.1-70b-versatile` model for low-latency responses.
 3.  **Response Parsing**: The raw text response from the AI is parsed into a JSON object to populate the `ResultPage` dynamically.
 
-*Note: Ensure your API Key is kept secure and not exposed in production builds without a backend proxy if possible.*
-
-Made with ❤️ by Edutech Team
-```
+Made with ❤️ by Jujur bingung Team
