@@ -1,4 +1,3 @@
-// src/pages/CareerCompare.jsx
 import { useState, useEffect } from "react";
 import {
   HiChartBar, HiSparkles, HiCheck, HiX,
@@ -7,16 +6,13 @@ import {
   HiOfficeBuilding, HiChevronDown, HiClock,
   HiScale, HiThumbUp, HiThumbDown, HiInformationCircle
 } from "react-icons/hi";
-import { CAREERS } from "../data/careersData"; // Import data
+import { CAREERS } from "../data/ComparecareersData";
 
-// ─── DESIGN TOKENS ─────────────────────────────────────────────
-// Kita definisikan warna secara terpisah untuk menghindari error 'undefined'
 const COLORS = {
   bg: "#0f0f12",
   text: "#f0f0f0",
   muted: "#8b8b9e",
-  
-  // Define A and B colors clearly
+
   careerA: {
     solid: "#818cf8", // Indigo
     bg: "rgba(129, 140, 248, 0.08)",
@@ -27,7 +23,7 @@ const COLORS = {
     bg: "rgba(52, 211, 153, 0.08)",
     highlight: "rgba(52, 211, 153, 0.15)"
   },
-  
+
   status: {
     pos: "#4ade80",
     neg: "#fb7185",
@@ -42,9 +38,11 @@ const DIFFICULTY_MAP = {
   "Rendah": { label: "Rendah", desc: "Mudah dipelajari", color: "text-emerald-400" },
 };
 
-// ─── COMPONENTS ───────────────────────────────────────────────
 
 function Selector({ selected, onSelect, exclude, label, accentColor }) {
+  useEffect(() => {
+    document.title = "Edutech - Career Comparison";
+  }, []);
   const [open, setOpen] = useState(false);
   const cur = CAREERS.find((c) => c.id === selected);
   const available = CAREERS.filter((c) => c.id !== exclude);
@@ -55,9 +53,9 @@ function Selector({ selected, onSelect, exclude, label, accentColor }) {
       <button
         onClick={() => setOpen(!open)}
         className="w-full flex items-center justify-between p-4 rounded-xl transition-all duration-200"
-        style={{ 
-          background: cur ? accentColor.bg : "rgba(255,255,255,0.03)", 
-          border: `1px solid ${cur ? accentColor.solid : "rgba(255,255,255,0.08)"}` 
+        style={{
+          background: cur ? accentColor.bg : "rgba(255,255,255,0.03)",
+          border: `1px solid ${cur ? accentColor.solid : "rgba(255,255,255,0.08)"}`
         }}
       >
         <div className="flex items-center gap-3">
@@ -77,7 +75,7 @@ function Selector({ selected, onSelect, exclude, label, accentColor }) {
         <>
           <div className="fixed inset-0 z-10" onClick={() => setOpen(false)} />
           <div className="absolute z-20 top-full mt-2 w-full rounded-xl overflow-hidden shadow-2xl"
-               style={{ background: "#1a1a1e", border: "1px solid rgba(255,255,255,0.1)" }}>
+            style={{ background: "#1a1a1e", border: "1px solid rgba(255,255,255,0.1)" }}>
             {available.map(c => (
               <button
                 key={c.id}
@@ -101,7 +99,7 @@ function Selector({ selected, onSelect, exclude, label, accentColor }) {
 function SalaryBar({ label, value, pct, color }) {
   const [w, setW] = useState(0);
   useEffect(() => { const t = setTimeout(() => setW(pct), 300); return () => clearTimeout(t); }, [pct]);
-  
+
   return (
     <div className="mb-3">
       <div className="flex justify-between items-center mb-1.5">
@@ -130,13 +128,13 @@ export default function CareerCompare() {
   };
 
   return (
-    <div className="min-h-screen pb-24 pt-20 px-4" style={{ background: COLORS.bg }}>
+    <div className="min-h-screen bg-white dark:bg-background pb-24 pt-20 px-4" style={{ background: COLORS.bg }}>
       <div className="max-w-6xl mx-auto">
-        
+
         {/* Header */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-black text-white mb-3">Career Comparison</h1>
-          <p className="text-zinc-400 max-w-lg mx-auto">
+          <h1 className="text-4xl font-accent font-black text-white mb-3">Career Comparison</h1>
+          <p className="text-zinc-400 max-w-lg text-sm sm:text-[15px] mx-auto">
             Analisis mendalam untuk membantu Anda memilih jalur karir yang tepat.
           </p>
         </div>
@@ -169,7 +167,7 @@ export default function CareerCompare() {
         {A && B && (
           <>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-              
+
               {/* COLUMN A */}
               <div className="rounded-2xl p-6 space-y-6 transition-all duration-300" style={{ background: COLORS.careerA.bg, border: `1px solid ${COLORS.careerA.highlight}` }}>
                 <div className="flex items-center gap-4">
@@ -263,7 +261,7 @@ export default function CareerCompare() {
 
                 {/* Key Stats */}
                 <div className="grid grid-cols-2 gap-4">
-                   <div className="bg-white/5 p-4 rounded-xl">
+                  <div className="bg-white/5 p-4 rounded-xl">
                     <p className="text-xs text-zinc-500 mb-1">Demand Industri</p>
                     <p className="text-xl font-bold text-white">{B.demandScore}%</p>
                     <p className="text-xs text-emerald-400">{B.demandLabel}</p>
@@ -317,14 +315,14 @@ export default function CareerCompare() {
                   <div>
                     <h4 className="font-bold text-white mb-1">Kesimpulan</h4>
                     <p className="text-sm text-zinc-400 max-w-md">
-                      Pilih <span style={{ color: COLORS.careerA.solid, fontWeight: 600 }}>{A.title}</span> jika kamu mengutamakan gaji dan tantangan teknis. 
+                      Pilih <span style={{ color: COLORS.careerA.solid, fontWeight: 600 }}>{A.title}</span> jika kamu mengutamakan gaji dan tantangan teknis.
                       Pilih <span style={{ color: COLORS.careerB.solid, fontWeight: 600 }}>{B.title}</span> jika kamu lebih menyukai keseimbangan hidup dan kreativitas.
                     </p>
                   </div>
                 </div>
-                
+
                 {/* RESET BUTTON */}
-                <button 
+                <button
                   onClick={handleReset}
                   className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 transition-colors text-sm font-semibold text-white"
                 >

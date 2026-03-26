@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { getCareerBySlug, getCareerByTitle, buildFallback } from "../data/careerData";
+import { getCareerBySlug, getCareerByTitle, buildFallback } from "../../data/careerData";
 import {
   HiArrowLeft, HiLightBulb, HiOfficeBuilding, HiSun, HiMoon,
 } from "react-icons/hi";

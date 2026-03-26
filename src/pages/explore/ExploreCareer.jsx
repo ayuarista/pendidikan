@@ -1,21 +1,16 @@
-// src/pages/ExploreCareer.jsx
-// Route: /explore-career
-// Klik card → /career/:slug
-
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { CAREERS, CATEGORIES } from "../data/careerData";
+import { CAREERS, CATEGORIES } from "../../data/careerData";
 import {
   HiSearch, HiX, HiArrowRight, HiTrendingUp,
   HiCurrencyDollar, HiLightningBolt,
 } from "react-icons/hi";
 
-// ─── TOKENS ───────────────────────────────────────────────────────────────────
 const BG = {
-  page:   "#0a0a0b", // Sedikit lebih gelap untuk kontras yang bersih
+  page:   "#0a0a0b", 
   s1:     "#111116",
-  s2:     "#141418", // Card background
-  s3:     "#1a1a1f", // Hover state
+  s2:     "#141418", 
+  s3:     "#1a1a1f",
   hi:     "#f9fafb",
   md:     "#9ca3af",
   lo:     "#6b7280",
@@ -23,12 +18,11 @@ const BG = {
   rule:   "rgba(255,255,255,0.06)",
 };
 
-// Warna demand dibuat lebih lembut (pastel/low saturation) agar tidak mencolok
 const DEMAND_META = {
-  "Sangat Tinggi": { color: "#6ee7b7", bg: "rgba(110, 231, 183, 0.08)" }, // Hijau lembut
-  "Tinggi":        { color: "#93c5fd", bg: "rgba(147, 197, 253, 0.08)" }, // Biru lembut
-  "Sedang":        { color: "#fcd34d", bg: "rgba(252, 211, 77, 0.08)" },  // Kuning lembut
-  "Rendah":        { color: "#9ca3af", bg: "rgba(156, 163, 175, 0.08)" }, // Abu-abu
+  "Sangat Tinggi": { color: "#6ee7b7", bg: "rgba(110, 231, 183, 0.08)" },
+  "Tinggi":        { color: "#93c5fd", bg: "rgba(147, 197, 253, 0.08)" }, 
+  "Sedang":        { color: "#fcd34d", bg: "rgba(252, 211, 77, 0.08)" },  
+  "Rendah":        { color: "#9ca3af", bg: "rgba(156, 163, 175, 0.08)" }, 
 };
 
 const ENTRY_META = {
@@ -37,7 +31,6 @@ const ENTRY_META = {
   "Tinggi":    { color: "#f87171" },
 };
 
-// ─── CAREER CARD ──────────────────────────────────────────────────────────────
 function CareerCard({ career, onClick }) {
   const demand = DEMAND_META[career.demand] || DEMAND_META["Sedang"];
   const entry = ENTRY_META[career.entryLevel] || { color: BG.md };
@@ -113,8 +106,10 @@ function CareerCard({ career, onClick }) {
   );
 }
 
-// ─── MAIN PAGE ────────────────────────────────────────────────────────────────
 export default function ExploreCareer() {
+    useEffect(() => {
+    document.title = "Edutech - Explore Career";
+  }, []);
   const navigate = useNavigate();
   const [query, setQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState("all");
