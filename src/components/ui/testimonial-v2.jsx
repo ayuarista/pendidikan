@@ -142,7 +142,7 @@ export default function TestimonialV2() {
                 className="mx-auto z-10 w-full max-w-6xl px-4"
             >
                 <div className="mb-8 flex flex-col items-center text-center">
-                    <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-violet-700 dark:text-violet-200">
+                    <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-neutral-400 dark:text-white/25">
                         Testimoni
                     </p>
 

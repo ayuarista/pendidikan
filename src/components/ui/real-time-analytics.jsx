@@ -97,7 +97,7 @@ export function RealTimeAnalytics({ className = "" }) {
             <div className="mx-auto w-full max-w-6xl">
                 <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
                     <div>
-                        <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-violet-700 dark:text-violet-200">Insight Perkembangan</p>
+                        <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-neutral-400 dark:text-white/25">Insight Perkembangan</p>
                         <h2 className="mt-1 text-2xl font-bold tracking-tight text-slate-900 dark:text-white md:text-3xl">Tren Kesiapan Karir</h2>
                         <p className="mt-1 text-sm text-slate-600 dark:text-white/65">Pergerakan skor minat dan kesiapan belajar secara dinamis</p>
                     </div>

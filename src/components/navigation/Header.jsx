@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { useLang } from "../../context/LanguageContext";
 import "./Header.css";
 import ThemeToggle from "../ui/ThemeToggle";
@@ -47,12 +47,16 @@ export default function Header() {
           {/* Desktop navigation */}
           <nav className="navbar-menu" aria-label="Primary navigation">
             {menuItems.map(({ label, href }) => (
-              <Link key={label} to={href} className="navbar-menu__item">
+              <NavLink
+                key={label}
+                to={href}
+                end={href === "/"}
+                className={({ isActive }) => `navbar-menu__item ${isActive ? "is-active" : ""}`}
+              >
                 {label}
-              </Link>
+              </NavLink>
             ))}
           </nav>
-          <ThemeToggle />
 
           {/* Right actions */}
           <div className="navbar-actions">
@@ -66,6 +70,7 @@ export default function Header() {
               <span className="navbar-lang-divider">|</span>
               <span className={lang === "id" ? "is-active" : ""}>ID</span>
             </button>
+            <ThemeToggle />
 
             <Link to="/ai-career-test" className="navbar-cta">
               {t.cta}
@@ -95,14 +100,15 @@ export default function Header() {
         aria-hidden={!mobileOpen}
       >
         {menuItems.map(({ label, href }) => (
-          <Link
+          <NavLink
             key={`mob-${label}`}
             to={href}
-            className="navbar-mobile__item"
+            end={href === "/"}
+            className={({ isActive }) => `navbar-mobile__item ${isActive ? "is-active" : ""}`}
             onClick={() => setMobileOpen(false)}
           >
             {label}
-          </Link>
+          </NavLink>
         ))}
         <div className="navbar-mobile__cta-row">
           <Link to="/ai-career-test" className="navbar-cta" onClick={() => setMobileOpen(false)}>

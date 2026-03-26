@@ -81,7 +81,7 @@ export default function Footer() {
                                 </linearGradient>
                             </defs>
                         </svg>
-                        <span className="site-footer__brand-name">EduQuest</span>
+                        <span className="site-footer__brand-name">Edutech</span>
                     </div>
 
                     <p className="site-footer__tagline">{ft.tagline}</p>

@@ -16,7 +16,7 @@ const translations = {
                 Explore: ["Explore Career", "Explore Education", "Start Quest"],
                 Support: ["Career Paths", "Majors", "Back to Home"],
             },
-            copyright: (year) => `© ${year} EduQuest. All rights reserved.`,
+            copyright: (year) => `© ${year} Edutech. All rights reserved.`,
         },
     },
     id: {
@@ -34,7 +34,7 @@ const translations = {
                 Jelajahi: ["Jelajahi Karir", "Jelajahi Edukasi", "Mulai Quest"],
                 Dukungan: ["Jalur Karir", "Jurusan", "Kembali ke Beranda"],
             },
-            copyright: (year) => `© ${year} EduQuest. Semua hak dilindungi.`,
+            copyright: (year) => `© ${year} Edutech. Semua hak dilindungi.`,
         },
     },
 };

@@ -20,7 +20,7 @@ const FEATURES = [
         desc: "Tes minat dan gaya kerja untuk menghasilkan rekomendasi karir yang lebih personal.",
         to: "/ai-career-test",
         action: "Mulai Tes",
-        status: "Live",
+        status: "Tes AI",
         icon: <Sparkles className="h-4 w-4 text-violet-500" />,
     },
     {
@@ -29,7 +29,7 @@ const FEATURES = [
         desc: "Jelajahi profesi berdasarkan bidang, prospek, rentang gaji, dan level entry.",
         to: "/explore-career",
         action: "Lihat Karir",
-        status: "Active",
+        status: "Karir",
         icon: <CheckCircle className="h-4 w-4 text-emerald-500" />,
     },
     {
@@ -38,7 +38,7 @@ const FEATURES = [
         desc: "Cari jurusan kuliah, skill yang dipelajari, dan arah karir yang relevan.",
         to: "/explore-education",
         action: "Lihat Jurusan",
-        status: "Updated",
+        status: "Jurusan",
         icon: <GraduationCap className="h-4 w-4 text-purple-500" />,
     },
     {
@@ -47,7 +47,7 @@ const FEATURES = [
         desc: "Bandingkan beberapa opsi karir agar keputusan yang diambil lebih objektif.",
         to: "/career-compare",
         action: "Bandingkan",
-        status: "Ready",
+        status: "Banding",
         icon: <Scale className="h-4 w-4 text-sky-500" />,
     },
 ];
@@ -79,22 +79,30 @@ const FAQS = [
     },
 ];
 
+const SUPPORT_EMAIL = import.meta.env.VITE_SUPPORT_EMAIL || "support@edutech.id";
+
+function handleFAQEmailClick() {
+    const subject = encodeURIComponent("Bantuan Edutech");
+    const body = encodeURIComponent("Halo tim Edutech,%0D%0A%0D%0ASaya butuh bantuan terkait:%0D%0A");
+    window.location.href = `mailto:${SUPPORT_EMAIL}?subject=${subject}&body=${body}`;
+}
+
 function getStatusClass(status) {
     const key = (status || "active").toLowerCase();
 
-    if (key === "live") {
+    if (key === "tes ai") {
         return "bg-emerald-100 text-emerald-700 ring-1 ring-emerald-200 dark:bg-emerald-500/15 dark:text-emerald-300 dark:ring-emerald-400/25";
     }
 
-    if (key === "active") {
+    if (key === "karir") {
         return "bg-sky-100 text-sky-700 ring-1 ring-sky-200 dark:bg-sky-500/15 dark:text-sky-300 dark:ring-sky-400/25";
     }
 
-    if (key === "ready") {
+    if (key === "banding") {
         return "bg-violet-100 text-violet-700 ring-1 ring-violet-200 dark:bg-violet-500/15 dark:text-violet-300 dark:ring-violet-400/25";
     }
 
-    if (key === "updated") {
+    if (key === "jurusan") {
         return "bg-amber-100 text-amber-700 ring-1 ring-amber-200 dark:bg-amber-500/15 dark:text-amber-300 dark:ring-amber-400/25";
     }
 
@@ -103,7 +111,7 @@ function getStatusClass(status) {
 
 export default function Home() {
     return (
-        <main className="relative min-h-screen overflow-hidden bg-slate-100/80 text-slate-900 dark:bg-transparent dark:text-white">
+        <main className="relative min-h-screen overflow-hidden bg-neutral-50 text-neutral-900 [&_h1]:font-accent [&_h2]:font-accent dark:bg-background dark:text-white">
             <section className="relative px-4 pb-10 pt-24 md:pt-30">
                 <DemoOne />
                 <div className="pointer-events-none absolute inset-0 bg-linear-to-r from-slate-200/75 via-sky-100/35 to-indigo-100/12 dark:from-[#05020f]/95 dark:via-[#140a2e]/70 dark:to-[#1a1140]/18" />
@@ -113,18 +121,18 @@ export default function Home() {
                 </div>
                 <div className="relative z-10 mx-auto w-full max-w-6xl">
                     <div>
-                        <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.14em] text-violet-700 dark:text-violet-200">
+                        <p data-aos="fade-up" className="mb-3 text-[11px] font-semibold uppercase tracking-[0.14em] text-neutral-400 dark:text-white/25">
                             Platform Eksplorasi Karir dan Pendidikan
                         </p>
-                        <h1 className="max-w-3xl text-4xl font-bold leading-tight tracking-tight text-slate-900 dark:text-white md:text-5xl">
+                        <h1 data-aos="fade-up" data-aos-delay="80" className="max-w-3xl text-4xl font-bold leading-tight tracking-tight text-slate-900 dark:text-white md:text-5xl">
                             Temukan Arah Belajar dan Karirmu dengan Lebih Jelas
                         </h1>
-                        <p className="mt-4 max-w-2xl text-sm leading-7 text-slate-700 dark:text-white/75 md:text-base">
+                        <p data-aos="fade-up" data-aos-delay="140" className="mt-4 max-w-2xl text-sm leading-7 text-slate-700 dark:text-white/75 md:text-base">
                             Website ini bantu kamu memahami pilihan masa depan lewat kombinasi tes AI,
                             eksplorasi data karir, eksplorasi jurusan, dan perbandingan opsi secara objektif.
                         </p>
 
-                        <div className="mt-7 flex flex-wrap gap-3">
+                        <div data-aos="fade-up" data-aos-delay="200" className="mt-7 flex flex-wrap gap-3">
                             <Link
                                 to="/ai-career-test"
                                 className="inline-flex h-11 items-center justify-center rounded-full bg-linear-to-r from-violet-600 to-fuchsia-500 px-5 text-sm font-medium text-white shadow-lg shadow-violet-900/35 transition hover:-translate-y-0.5"
@@ -139,21 +147,21 @@ export default function Home() {
                             </Link>
                         </div>
 
-                        <div className="mt-4 max-w-3xl">
+                        <div data-aos="fade-up" data-aos-delay="260" className="mt-4 max-w-3xl">
                             <Testimonials />
                         </div>
                     </div>
 
                     <div className="mt-7 grid grid-cols-1 gap-3 md:grid-cols-3">
-                        <article className="rounded-2xl border border-transparent bg-white/78 p-4 shadow-[0_1px_0_rgba(15,23,42,0.05)] ring-1 ring-slate-900/5 backdrop-blur dark:border-white/10 dark:bg-white/5 dark:ring-0">
+                        <article data-aos="fade-up" data-aos-delay="120" className="rounded-2xl border border-transparent bg-white/78 p-4 shadow-[0_1px_0_rgba(15,23,42,0.05)] ring-1 ring-slate-900/5 backdrop-blur dark:border-white/10 dark:bg-white/5 dark:ring-0">
                             <h3 className="text-xl font-bold text-slate-900 dark:text-white">{CAREERS.length}+</h3>
                             <p className="text-sm text-slate-600 dark:text-white/70">Data profesi</p>
                         </article>
-                        <article className="rounded-2xl border border-transparent bg-white/78 p-4 shadow-[0_1px_0_rgba(15,23,42,0.05)] ring-1 ring-slate-900/5 backdrop-blur dark:border-white/10 dark:bg-white/5 dark:ring-0">
+                        <article data-aos="fade-up" data-aos-delay="180" className="rounded-2xl border border-transparent bg-white/78 p-4 shadow-[0_1px_0_rgba(15,23,42,0.05)] ring-1 ring-slate-900/5 backdrop-blur dark:border-white/10 dark:bg-white/5 dark:ring-0">
                             <h3 className="text-xl font-bold text-slate-900 dark:text-white">{MAJORS.length}+</h3>
                             <p className="text-sm text-slate-600 dark:text-white/70">Data jurusan</p>
                         </article>
-                        <article className="rounded-2xl border border-transparent bg-white/78 p-4 shadow-[0_1px_0_rgba(15,23,42,0.05)] ring-1 ring-slate-900/5 backdrop-blur dark:border-white/10 dark:bg-white/5 dark:ring-0">
+                        <article data-aos="fade-up" data-aos-delay="240" className="rounded-2xl border border-transparent bg-white/78 p-4 shadow-[0_1px_0_rgba(15,23,42,0.05)] ring-1 ring-slate-900/5 backdrop-blur dark:border-white/10 dark:bg-white/5 dark:ring-0">
                             <h3 className="text-xl font-bold text-slate-900 dark:text-white">4</h3>
                             <p className="text-sm text-slate-600 dark:text-white/70">Fitur utama</p>
                         </article>
@@ -163,14 +171,16 @@ export default function Home() {
 
             <section className="px-4 py-6">
                 <div className="mx-auto w-full max-w-6xl">
-                    <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-violet-700 dark:text-violet-200">Fitur Utama</p>
-                    <h2 className="mt-2 text-2xl font-bold tracking-tight text-slate-900 dark:text-white md:text-3xl">
+                    <p data-aos="fade-up" className="text-[11px] font-semibold uppercase tracking-[0.14em] text-neutral-400 dark:text-white/25">Fitur Utama</p>
+                    <h2 data-aos="fade-up" data-aos-delay="80" className="mt-2 text-2xl font-bold tracking-tight text-slate-900 dark:text-white md:text-3xl">
                         Yang Bisa Kamu Lakukan di Website Ini
                     </h2>
                     <div className="mt-5 grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-4">
-                        {FEATURES.map((item) => (
+                        {FEATURES.map((item, index) => (
                             <article
                                 key={item.title}
+                                data-aos="fade-up"
+                                data-aos-delay={120 + index * 70}
                                 className="group relative overflow-hidden rounded-xl bg-white p-4 transition-all duration-300 hover:-translate-y-0.5 dark:bg-black"
                             >
                                 <div className="absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
@@ -198,7 +208,7 @@ export default function Home() {
                                     <div className="mt-auto flex items-center justify-end gap-2 pt-2">
                                         <Link
                                             to={item.to}
-                                            className="text-xs text-gray-500 opacity-80 transition-opacity group-hover:opacity-100 dark:text-gray-400"
+                                            className="text-xs text-gray-500 opacity-80 transition-all group-hover:opacity-100 group-hover:text-violet-700 dark:text-gray-400 dark:group-hover:text-violet-300"
                                         >
                                             {item.action} -&gt;
                                         </Link>
@@ -218,14 +228,14 @@ export default function Home() {
 
             <section className="px-4 py-8">
                 <div className="mx-auto w-full max-w-6xl">
-                    <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-violet-700 dark:text-violet-200">Panduan Pakai</p>
-                    <h2 className="mt-2 text-2xl font-bold tracking-tight text-slate-900 dark:text-white md:text-3xl">
+                    <p data-aos="fade-up" className="text-[11px] font-semibold uppercase tracking-[0.14em] text-neutral-400 dark:text-white/25">Panduan Pakai</p>
+                    <h2 data-aos="fade-up" data-aos-delay="80" className="mt-2 text-2xl font-bold tracking-tight text-slate-900 dark:text-white md:text-3xl">
                         Pilih Fitur Berdasarkan Kondisi Kamu Sekarang
                     </h2>
-                    <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-600 dark:text-white/70">
+                    <p data-aos="fade-up" data-aos-delay="120" className="mt-2 max-w-3xl text-sm leading-6 text-slate-600 dark:text-white/70">
                         Bagian ini fokus ke skenario penggunaan, jadi kamu bisa langsung tahu fitur mana yang dipakai duluan.
                     </p>
-                    <div className="mt-4">
+                    <div data-aos="fade-up" data-aos-delay="160" className="mt-4">
                         <BentoGridDemo />
                     </div>
                 </div>
@@ -233,15 +243,17 @@ export default function Home() {
 
             <section className="border-y border-slate-300/40 bg-white px-4 py-8 dark:border-[rgba(255,255,255,0.06)] dark:bg-[rgb(20,20,24)]">
                 <div className="mx-auto w-full max-w-6xl">
-                    <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-violet-700 dark:text-violet-200">Rekomendasi Cepat</p>
-                    <h2 className="mt-2 text-2xl font-bold tracking-tight text-slate-900 dark:text-white md:text-3xl">
+                    <p data-aos="fade-up" className="text-[11px] font-semibold uppercase tracking-[0.14em] text-neutral-400 dark:text-white/25">Rekomendasi Cepat</p>
+                    <h2 data-aos="fade-up" data-aos-delay="80" className="mt-2 text-2xl font-bold tracking-tight text-slate-900 dark:text-white md:text-3xl">
                         Mulai dari Pilihan Populer
                     </h2>
 
                     <div className="mt-5 grid grid-cols-1 items-start gap-5 lg:grid-cols-[0.95fr_1.05fr]">
-                        <ProjectShowcaseDemo />
+                        <div data-aos="fade-up" data-aos-delay="120">
+                            <ProjectShowcaseDemo />
+                        </div>
 
-                        <div className="relative lg:-mt-16 xl:-mt-25">
+                        <div data-aos="fade-up" data-aos-delay="180" className="relative lg:-mt-16 xl:-mt-25">
                             <div
                                 aria-hidden="true"
                                 className="pointer-events-none absolute -right-24 top-1/2 z-0 h-96 w-96 -translate-y-1/2 rounded-full bg-linear-to-br from-violet-700/45 via-violet-500/35 to-violet-300/22 blur-[130px]"
@@ -250,7 +262,7 @@ export default function Home() {
                                 <div className="h-125 w-full rounded-2xl lg:h-130">
                                     <SplineScene
                                         scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
-                                        className="h-full w-full scale-[1.2] transform-gpu"
+                                        className="h-full w-full scale-[0.95] transform-gpu md:scale-[1.2]"
                                     />
                                 </div>
                             </div>
@@ -264,6 +276,7 @@ export default function Home() {
                 subtitle="FAQ"
                 description="Jawaban singkat untuk pertanyaan yang paling sering muncul sebelum mulai eksplorasi."
                 buttonLabel="Kirim email"
+                onButtonClick={handleFAQEmailClick}
                 faqsLeft={FAQS.slice(0, 3)}
                 faqsRight={FAQS.slice(3)}
             />

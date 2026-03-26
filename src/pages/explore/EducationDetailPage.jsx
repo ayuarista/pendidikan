@@ -48,12 +48,21 @@ export default function EducationDetailPage({ major: majorProp, onBack }) {
       return;
     }
 
+    // For unavailable majors, always return to Explore Education.
+    if (!d) {
+      navigate("/explore-education", { replace: true });
+      return;
+    }
+
     // Check navigation state
     const from = location?.state?.from;
 
     if (from === 'ai-career-test') {
-      // If came from result page, go back to that page
-      navigate(-1);
+      // Return to AI Career Test and ask it to restore the previous result snapshot.
+      navigate("/ai-career-test", {
+        replace: true,
+        state: { restoreFromEducation: true },
+      });
     } else {
       // If came from explore or direct access, go to explore page
       navigate("/explore-education", { replace: true });
@@ -79,7 +88,7 @@ export default function EducationDetailPage({ major: majorProp, onBack }) {
           </div>
 
           <h2 className="text-lg font-bold mb-2 text-neutral-900 dark:text-white">
-            Jurusan tidak ditemukan
+            Jurusan tidak tersedia
           </h2>
           <p className="text-sm text-neutral-500 dark:text-white/35 mb-1 max-w-xs mx-auto leading-relaxed">
             Jurusan yang kamu cari belum tersedia di database kami, atau nama jurusan tidak cocok.
@@ -154,34 +163,32 @@ export default function EducationDetailPage({ major: majorProp, onBack }) {
           </>
         )}
 
-        {/* nav */}
-        <div className="absolute top-5 left-5 right-5 flex items-center justify-between z-10">
-          <button
-            onClick={handleBack}
-            className="flex items-center gap-1.5 text-sm font-medium px-3 py-2 rounded-xl
-              transition-all backdrop-blur-md cursor-pointer
-              bg-white/80 dark:bg-black/50
-              text-neutral-600 dark:text-white/60
-              hover:text-neutral-900 dark:hover:text-white"
-          >
-            <HiArrowLeft className="size-4" /> Kembali
-          </button>
-                      <span
+        {/* Top action row */}
+        <div className="absolute top-0 left-0 right-0 z-20 pt-22 md:pt-24">
+          <div className="mx-auto w-full max-w-6xl px-5 sm:px-8 flex items-center justify-between">
+            <button
+              onClick={handleBack}
+              className="inline-flex items-center gap-1.5 rounded-full border border-black/65 bg-black/80 px-5 py-2.5 text-sm font-semibold text-white shadow-sm backdrop-blur-md transition-colors hover:bg-black/90 dark:border-white/65 dark:bg-white/85 dark:text-neutral-900 dark:hover:bg-white"
+            >
+              <HiArrowLeft className="size-4" /> Kembali
+            </button>
+            <span
               className="text-[11px] font-bold px-3 py-1.5 rounded-xl bg-white/80 dark:bg-black/50 backdrop-blur-md"
               style={{ color: d.accentColor }}
             >
               {d.degree}
             </span>
+          </div>
         </div>
 
         {/* title */}
         <div className="absolute bottom-0 left-0 right-0 px-5 pb-6 z-10">
           <div className="max-w-3xl mx-auto">
-            <p className="text-[10px] font-bold uppercase tracking-widest mb-1.5 text-neutral-200 dark:text-white/40">
+            <p className="text-[10px] font-bold uppercase tracking-widest mb-1.5 text-neutral-600 dark:text-white/40">
               {d.category}
             </p>
             <h1
-              className="font-black leading-tight text-white font-accent"
+              className="font-bold leading-tight text-neutral-900 dark:text-white font-accent"
               style={{ fontSize: "clamp(1.8rem,5vw,2.8rem)", letterSpacing: "-0.025em" }}
             >
               {d.name}

@@ -10,7 +10,7 @@ import {
   HiExternalLink,
 } from "react-icons/hi";
 import { LuMessageCircleHeart } from "react-icons/lu";
-import CareerDetailPage from "../../pages/CareerDetailPage";
+import CareerDetailPage from "../../pages/explore/CareerDetailPage";
 import PDFResult from "./PDFResult";
 import { FaMoneyBill } from "react-icons/fa";
 

@@ -2,14 +2,14 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { getCareerBySlug, getCareerByTitle, buildFallback } from "../../data/careerData";
 import {
-  HiArrowLeft, HiLightBulb, HiOfficeBuilding, HiSun, HiMoon,
+  HiArrowLeft, HiLightBulb, HiOfficeBuilding,
 } from "react-icons/hi";
 
 // Accent rotation
 const TIP_ACCENTS = [
-  { solid: "#f59e0b", dim: "rgba(245,158,11,0.08)",  border: "rgba(245,158,11,0.18)" },
-  { solid: "#8b5cf6", dim: "rgba(139,92,246,0.08)",  border: "rgba(139,92,246,0.15)" },
-  { solid: "#10b981", dim: "rgba(16,185,129,0.08)",  border: "rgba(16,185,129,0.18)" },
+  { solid: "#f59e0b", dim: "rgba(245,158,11,0.08)", border: "rgba(245,158,11,0.18)" },
+  { solid: "#8b5cf6", dim: "rgba(139,92,246,0.08)", border: "rgba(139,92,246,0.15)" },
+  { solid: "#10b981", dim: "rgba(16,185,129,0.08)", border: "rgba(16,185,129,0.18)" },
 ];
 const TOOL_DOTS = ["#8b5cf6", "#10b981", "#f59e0b", "#f43f5e"];
 
@@ -42,21 +42,19 @@ function Chip({ children, color, bg, border }) {
 
 export default function CareerDetailPage({ career: careerProp, onBack }) {
   const { slug } = useParams() || {};
-  const navigate  = useNavigate?.() || null;
+  const navigate = useNavigate?.() || null;
 
-  // Dark mode state — reads system preference by default
-  const [dark, setDark] = useState(() =>
-    typeof window !== "undefined"
-      ? window.matchMedia("(prefers-color-scheme: dark)").matches
-      : true
-  );
+  // Follow app-level theme by watching the html "dark" class.
+  const [isDark, setIsDark] = useState(() => document.documentElement.classList.contains("dark"));
 
-  // Apply/remove "dark" class on <html> so Tailwind dark: variants work
   useEffect(() => {
     const root = document.documentElement;
-    if (dark) root.classList.add("dark");
-    else root.classList.remove("dark");
-  }, [dark]);
+    const observer = new MutationObserver(() => {
+      setIsDark(root.classList.contains("dark"));
+    });
+    observer.observe(root, { attributes: true, attributeFilter: ["class"] });
+    return () => observer.disconnect();
+  }, []);
 
   const careerFromProp = careerProp
     ? (getCareerByTitle(careerProp.title) || buildFallback(careerProp))
@@ -66,8 +64,8 @@ export default function CareerDetailPage({ career: careerProp, onBack }) {
 
   const aiSalary = careerProp?.avgSalary || null;
   const aiDemand = careerProp?.industryDemand || null;
-  const aiMatch  = careerProp?.match || null;
-  const aiDesc   = careerProp?.description || null;
+  const aiMatch = careerProp?.match || null;
+  const aiDesc = careerProp?.description || null;
 
   useEffect(() => { window.scrollTo({ top: 0, behavior: "smooth" }); }, []);
 
@@ -95,56 +93,58 @@ export default function CareerDetailPage({ career: careerProp, onBack }) {
 
       {/* ── HERO ── */}
       <div className="relative overflow-hidden" style={{ height: 280 }}>
-        <img
-          src={d.img} alt={d.title}
-          className="w-full h-full object-cover"
-          style={{ filter: dark ? "brightness(0.22) saturate(0.5)" : "brightness(0.45) saturate(0.7)" }}
-        />
+        {/* Hero image + same shadow treatment as Explore Education */}
+        {d.img && (
+          <div className="absolute inset-0 z-0">
+            <img
+              src={d.img}
+              alt={d.title}
+              className="w-full h-full object-cover opacity-30 dark:opacity-20"
+            />
+            <div className="absolute inset-0 bg-linear-to-t from-background/80 to-transparent" />
+          </div>
+        )}
 
-        {/* gradient fade to page bg */}
-        <div
-          className="absolute inset-0"
-          style={{
-            background: dark
-              ? "linear-gradient(to bottom, rgba(13,13,15,0) 0%, rgba(13,13,15,0.65) 60%, #0d0d0f 100%)"
-              : "linear-gradient(to bottom, rgba(250,250,250,0) 0%, rgba(250,250,250,0.5) 60%, #f9fafb 100%)",
-          }}
-        />
+        {/* Fallback gradient if no image */}
+        {!d.img && (
+          <>
+            <div className="absolute inset-0 dark:hidden" style={{ background: `linear-gradient(135deg, ${d.accentColor}12 0%, #f5f5f5 100%)` }} />
+            <div className="absolute inset-0 hidden dark:block" style={{ background: `linear-gradient(135deg, ${d.accentColor}18 0%, #0d0d0f 100%)` }} />
+          </>
+        )}
 
-        {/* accent tint */}
-        <div className="absolute inset-0" style={{ background: `${d.accentColor}07` }} />
+        {/* Top action row */}
+        <div className="absolute top-0 left-0 right-0 z-20 pt-22 md:pt-24">
+          <div className="mx-auto w-full max-w-6xl px-5 sm:px-8 flex items-center justify-between">
+            <button
+              onClick={handleBack}
+              className="inline-flex items-center gap-1.5 rounded-full border border-black/65 bg-black/80 px-5 py-2.5 text-sm font-semibold text-white shadow-sm backdrop-blur-md transition-colors hover:bg-black/90 dark:border-white/65 dark:bg-white/85 dark:text-neutral-900 dark:hover:bg-white"
+            >
+              <HiArrowLeft className="size-4" />
+              Kembali
+            </button>
 
-        {/* navbar */}
-        <div className="absolute top-5 left-5 right-5 flex items-center justify-between">
-          <button
-            onClick={handleBack}
-            className="flex items-center gap-1.5 text-sm font-medium px-3 py-2 rounded-xl transition-colors text-white/70 hover:text-white"
-            style={{ background: "rgba(0,0,0,0.40)", backdropFilter: "blur(10px)" }}
-          >
-            <HiArrowLeft className="size-4" />
-            Kembali
-          </button>
-
-          <div className="flex items-center gap-2">
-            {aiMatch && (
-              <span
-                className="text-[11px] font-bold px-3 py-1.5 rounded-xl text-violet-400"
-                style={{ background: "rgba(0,0,0,0.40)", backdropFilter: "blur(10px)", border: "1px solid rgba(139,92,246,0.25)" }}
-              >
-                {aiMatch}% Cocok
-              </span>
-            )}
+            <div className="flex items-center gap-2">
+              {aiMatch && (
+                <span
+                  className="text-[11px] font-bold px-3 py-1.5 rounded-xl text-violet-300"
+                  style={{ background: "rgba(0,0,0,0.40)", backdropFilter: "blur(10px)", border: "1px solid rgba(139,92,246,0.25)" }}
+                >
+                  {aiMatch}% Cocok
+                </span>
+              )}
+            </div>
           </div>
         </div>
 
         {/* title */}
-        <div className="absolute bottom-0 left-0 right-0 px-5 pb-6">
+        <div className="absolute bottom-0 left-0 right-0 px-5 pb-6 z-10">
           <div className="max-w-2xl mx-auto">
-            <p className="text-[10px] font-bold uppercase tracking-widest mb-1.5 text-white/40">
+            <p className={`text-[10px] font-bold uppercase tracking-widest mb-1.5 ${isDark ? "text-white/40" : "text-neutral-600"}`}>
               {d.field}
             </p>
             <h1
-              className="text-white font-black leading-tight"
+              className={`font-accent font-bold leading-tight ${isDark ? "text-white" : "text-neutral-900"}`}
               style={{ fontSize: "clamp(1.75rem,5vw,2.6rem)", letterSpacing: "-0.025em" }}
             >
               {d.title}
@@ -276,7 +276,7 @@ export default function CareerDetailPage({ career: careerProp, onBack }) {
                         ? "bg-white dark:bg-transparent border border-black/[0.06] dark:border-transparent"
                         : "bg-white dark:bg-[#111116] border border-black/[0.05] dark:border-transparent"
                       }`}
-                    style={i === 0 ? { background: dark ? `${d.accentColor}10` : `${d.accentColor}08` } : undefined}
+                    style={i === 0 ? { background: isDark ? `${d.accentColor}10` : `${d.accentColor}08` } : undefined}
                   >
                     <div>
                       <p className="text-sm font-bold text-neutral-800 dark:text-neutral-100">{step.level}</p>

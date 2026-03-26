@@ -6,19 +6,19 @@ import { Link } from "react-router-dom";
 function getStatusClass(status) {
     const key = (status || "active").toLowerCase();
 
-    if (key === "live") {
+    if (key === "tes ai") {
         return "bg-emerald-100 text-emerald-700 ring-1 ring-emerald-200 dark:bg-emerald-500/15 dark:text-emerald-300 dark:ring-emerald-400/25";
     }
 
-    if (key === "active") {
+    if (key === "karir") {
         return "bg-sky-100 text-sky-700 ring-1 ring-sky-200 dark:bg-sky-500/15 dark:text-sky-300 dark:ring-sky-400/25";
     }
 
-    if (key === "ready") {
+    if (key === "banding") {
         return "bg-violet-100 text-violet-700 ring-1 ring-violet-200 dark:bg-violet-500/15 dark:text-violet-300 dark:ring-violet-400/25";
     }
 
-    if (key === "updated") {
+    if (key === "jurusan") {
         return "bg-amber-100 text-amber-700 ring-1 ring-amber-200 dark:bg-amber-500/15 dark:text-amber-300 dark:ring-amber-400/25";
     }
 
@@ -35,7 +35,7 @@ const defaultItems = [
         meta: "Personalisasi",
         description: "Tes minat dan gaya kerja berbasis AI untuk memetakan arah karir yang paling cocok.",
         icon: null,
-        status: "Live",
+        status: "Tes AI",
         tags: ["AI", "Assessment", "Insight"],
         colSpan: 2,
         hasPersistentHover: true,
@@ -47,7 +47,7 @@ const defaultItems = [
         meta: "Berbasis Data",
         description: "Jelajahi profesi berdasarkan prospek, rentang gaji, tools, dan level entry.",
         icon: null,
-        status: "Active",
+        status: "Karir",
         tags: ["Career", "Market"],
         cta: "Lihat Karir ->",
         to: "/explore-career",
@@ -57,7 +57,7 @@ const defaultItems = [
         meta: "Jalur Akademik",
         description: "Temukan jurusan, materi inti, dan hubungan langsung ke opsi karir masa depan.",
         icon: null,
-        status: "Updated",
+        status: "Jurusan",
         tags: ["Major", "Skill", "Path"],
         colSpan: 2,
         cta: "Lihat Jurusan ->",
@@ -68,7 +68,7 @@ const defaultItems = [
         meta: "Bantuan Keputusan",
         description: "Bandingkan beberapa opsi karir berdampingan agar keputusan lebih objektif.",
         icon: null,
-        status: "Ready",
+        status: "Banding",
         tags: ["Compare", "Decision"],
         cta: "Bandingkan ->",
         to: "/career-compare",
@@ -109,7 +109,7 @@ function BentoGrid({ items = defaultItems }) {
                                         getStatusClass(item.status),
                                     )}
                                 >
-                                    {item.status || "Active"}
+                                    {item.status || "Karir"}
                                 </span>
                             </div>
 
@@ -132,7 +132,7 @@ function BentoGrid({ items = defaultItems }) {
                                         </span>
                                     ))}
                                 </div>
-                                <span className="text-xs text-gray-500 opacity-0 transition-opacity group-hover:opacity-100 dark:text-gray-400">
+                                <span className="text-xs text-gray-500 opacity-0 transition-all group-hover:opacity-100 group-hover:text-violet-700 dark:text-gray-400 dark:group-hover:text-violet-300">
                                     {item.cta || "Explore ->"}
                                 </span>
                             </div>

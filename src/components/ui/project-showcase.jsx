@@ -91,7 +91,7 @@ export function ProjectShowcase() {
             onMouseMove={handleMouseMove}
             className="relative mx-auto w-full max-w-2xl px-2 py-3 lg:py-8"
         >
-            <h3 className="mb-6 text-[11px] font-semibold uppercase tracking-[0.14em] text-violet-700 dark:text-violet-200">
+            <h3 className="mb-6 text-[11px] font-semibold uppercase tracking-[0.14em] text-neutral-400 dark:text-white/25">
                 Jelajahi Pilihan
             </h3>
 
