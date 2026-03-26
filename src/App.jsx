@@ -19,7 +19,7 @@ export default function App() {
   return (
     <LanguageProvider>
       <Router>
-        <ScrolltoTop/>
+        <ScrolltoTop/> //buat scroll ke atas tiap ganti halaman, biar ga bingung sendiri :D
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />
