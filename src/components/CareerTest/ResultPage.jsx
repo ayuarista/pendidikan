@@ -61,301 +61,332 @@ function Div() {
   return <div className="my-12 h-px bg-neutral-200 dark:bg-white/5" />;
 }
 
-// ─── PDF STYLES ───────────────────────────────────────────────────────────────
-// Semua warna pakai hex/rgb — hindari oklch agar html2canvas tidak error
-const pdfStyles = {
-  container: {
-    width: "794px",
-    background: "#ffffff",
-    padding: "60px 60px",
-    boxSizing: "border-box",
-    fontFamily: "'Montserrat', 'Segoe UI', sans-serif",
-    color: "#0f172a",
-  },
-  header: {
-    borderBottom: "3px solid #7c3aed",
-    paddingBottom: "24px",
-    marginBottom: "36px",
-  },
-  title: {
-    fontSize: "32px",
-    fontWeight: "900",
-    margin: "8px 0 12px",
-    color: "#0f172a",
-  },
-  sectionLabel: {
-    fontSize: "10px",
-    fontWeight: "700",
-    textTransform: "uppercase",
-    letterSpacing: "0.15em",
-    color: "#94a3b8",
-    marginBottom: "16px",
-  },
-  divider: {
-    height: "1px",
-    background: "#e2e8f0",
-    margin: "32px 0",
-  },
-  grid2: {
-    display: "grid",
-    gridTemplateColumns: "1fr 1fr",
-    gap: "16px",
-  },
-};
-
-// ─── PDF COMPONENTS ───────────────────────────────────────────────────────────
-function PdfHeader({ result }) {
+// ─── PDF PRINT COMPONENT ─────────────────────────────────────────────────────
+function PrintStyles() {
   return (
-    <div style={pdfStyles.header}>
-      <p style={{ fontSize: "10px", color: "#7c3aed", fontWeight: "700", letterSpacing: "0.1em" }}>
-        AI CAREER TEST · EDUTECH
-      </p>
-      <h1 style={pdfStyles.title}>{result.personalityType}</h1>
-      <p style={{ fontSize: "14px", color: "#64748b", lineHeight: "1.6", maxWidth: "600px" }}>
-        {result.personalityDescription}
-      </p>
-    </div>
-  );
-}
-
-function PdfCareerSection({ careers }) {
-  return (
-    <div style={{ marginBottom: "40px" }}>
-      <p style={pdfStyles.sectionLabel}>Peluang Karir Terbaik</p>
-      <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
-        {careers?.map((c, i) => (
-          <div key={i} style={{ display: "flex", gap: "20px", alignItems: "flex-start" }}>
-            <div style={{
-              minWidth: "48px", height: "48px", borderRadius: "50%",
-              display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column",
-              background: i === 0 ? "#ede9fe" : "#f8fafc",
-            }}>
-              <span style={{ fontSize: "14px", fontWeight: "800", color: i === 0 ? "#7c3aed" : "#64748b" }}>{c.match}%</span>
-            </div>
-            <div style={{ flex: 1 }}>
-              <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "4px" }}>
-                <span style={{ fontWeight: "700", fontSize: "15px" }}>{c.title}</span>
-                {i === 0 && (
-                  <span style={{ fontSize: "9px", fontWeight: "700", color: "#d97706", background: "#fffbeb", padding: "2px 6px", borderRadius: "4px" }}>
-                    TOP PICK
-                  </span>
-                )}
-              </div>
-              <p style={{ fontSize: "13px", color: "#64748b", lineHeight: "1.5", marginBottom: "8px" }}>{c.description}</p>
-              <div style={{ display: "flex", gap: "8px" }}>
-                {c.avgSalary && (
-                  <span style={{ fontSize: "11px", fontWeight: "600", color: "#10b981", background: "rgba(16,185,129,0.1)", padding: "2px 8px", borderRadius: "4px" }}>
-                    {c.avgSalary}
-                  </span>
-                )}
-                {c.industryDemand && (
-                  <span style={{ fontSize: "11px", color: "#64748b", background: "#f1f5f9", padding: "2px 8px", borderRadius: "4px" }}>
-                    Permintaan pasar: {c.industryDemand}
-                  </span>
-                )}
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-function PdfSkillSection({ skills }) {
-  return (
-    <div style={{ marginBottom: "40px" }}>
-      <p style={pdfStyles.sectionLabel}>Skill yang Perlu Dikembangkan</p>
-      <p style={{ fontSize: "12px", color: "#64748b", marginBottom: "16px", lineHeight: "1.5" }}>
-        Berikut skill yang direkomendasikan AI untuk mendukung karir pilihanmu, beserta langkah konkret untuk memulai belajar.
-      </p>
-      <div style={pdfStyles.grid2}>
-        {skills?.map((s, i) => (
-          <div key={i} style={{ background: "#f8fafc", padding: "16px", borderRadius: "12px" }}>
-            <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "8px" }}>
-              <span style={{ fontWeight: "700", fontSize: "13px" }}>{s.skill}</span>
-              <span style={{
-                fontSize: "9px", fontWeight: "700", textTransform: "uppercase", padding: "2px 6px", borderRadius: "4px",
-                background: s.targetLevel === "Penting" ? "#fee2e2" : "#fef3c7",
-                color: s.targetLevel === "Penting" ? "#b91c1c" : "#b45309",
-              }}>
-                {s.targetLevel}
-              </span>
-            </div>
-            <p style={{ fontSize: "12px", color: "#64748b", lineHeight: "1.5" }}>{s.howToLearn}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-function PdfMajorSection({ majors }) {
-  return (
-    <div style={{ marginBottom: "40px" }}>
-      <p style={pdfStyles.sectionLabel}>Rekomendasi Jurusan Kuliah</p>
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "20px" }}>
-        {majors?.map((m, i) => (
-          <div key={i}>
-            <p style={{ fontWeight: "700", marginBottom: "4px" }}>{m.name}</p>
-            <p style={{ fontSize: "12px", color: "#64748b", lineHeight: "1.5", marginBottom: "6px" }}>{m.reason}</p>
-            <div style={{ display: "flex", gap: "6px", flexWrap: "wrap" }}>
-              {m.universities?.slice(0, 2).map((u, j) => (
-                <span key={j} style={{ fontSize: "10px", background: "#ede9fe", color: "#6d28d9", padding: "2px 6px", borderRadius: "4px" }}>
-                  {u}
-                </span>
-              ))}
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-function PdfUmkmSection({ items }) {
-  return (
-    <div style={{ marginBottom: "40px" }}>
-      <p style={pdfStyles.sectionLabel}>Ide Wirausaha & UMKM</p>
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "20px" }}>
-        {items?.map((u, i) => (
-          <div key={i}>
-            <p style={{ fontWeight: "600", marginBottom: "2px", color: "#1f2937" }}>{u.sector}</p>
-            <p style={{ fontSize: "12px", color: "#64748b", lineHeight: "1.5" }}>{u.startupIdea}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-function PdfRoadmapSection({ roadmap }) {
-  if (!roadmap) return null;
-  const entries = Object.entries(roadmap);
-
-  return (
-    <div style={{ marginBottom: "40px" }}>
-      <p style={pdfStyles.sectionLabel}>Rencana Pengembangan Skill (5 Tahun)</p>
-      <div style={{ display: "flex", gap: "12px" }}>
-        {entries.map(([, skills], i) => (
-          <div key={i} style={{ flex: 1, background: "#f8fafc", borderRadius: "12px", padding: "12px" }}>
-            <div style={{
-              width: "24px", height: "24px", background: "#7c3aed", color: "white",
-              borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center",
-              fontWeight: "800", fontSize: "12px", marginBottom: "8px",
-            }}>
-              {i + 1}
-            </div>
-            <p style={{ fontSize: "10px", fontWeight: "700", color: "#7c3aed", marginBottom: "6px", textTransform: "uppercase" }}>
-              Tahun {i + 1}
-            </p>
-            <ul style={{ margin: 0, padding: 0, listStyle: "none" }}>
-              {(Array.isArray(skills) ? skills : []).map((sk, j) => (
-                <li key={j} style={{ fontSize: "10px", color: "#4b5563", marginBottom: "3px", paddingLeft: "8px", position: "relative" }}>
-                  <span style={{ position: "absolute", left: 0, top: "5px", width: "3px", height: "3px", borderRadius: "50%", background: "#7c3aed", display: "inline-block" }} />
-                  {sk}
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-function PdfFooter({ message }) {
-  return (
-    <div style={{ marginTop: "20px" }}>
-      {message && (
-        <div style={{ background: "#ede9fe", borderLeft: "4px solid #7c3aed", padding: "16px", borderRadius: "4px" }}>
-          <p style={{ fontSize: "12px", color: "#5b21b6", fontStyle: "italic", margin: 0 }}>"{message}"</p>
-        </div>
-      )}
-      <p style={{ marginTop: "40px", fontSize: "9px", color: "#94a3b8", textAlign: "center" }}>
-        Dibuat oleh Edutech AI Career Test · {new Date().toLocaleDateString("id-ID", { year: "numeric", month: "long" })}
-      </p>
-    </div>
-  );
-}
-
-// ─── PDF DOWNLOAD HOOK ────────────────────────────────────────────────────────
-function usePDFDownload(result) {
-  const [downloading, setDownloading] = useState(false);
-  const printRef = useRef(null);
-
-  const handleDownload = async () => {
-    if (downloading) return;
-    setDownloading(true);
-
-    try {
-      const [{ default: jsPDF }, { default: html2canvas }] = await Promise.all([
-        import("jspdf"),
-        import("html2canvas"),
-      ]);
-
-      const element = printRef.current;
-      if (!element) return;
-
-      element.style.display = "block";
-      element.style.position = "fixed";
-      element.style.top = "0";
-      element.style.left = "-9999px";
-
-      await new Promise((r) => setTimeout(r, 500));
-
-      const canvas = await html2canvas(element, {
-        scale: 2,
-        useCORS: true,
-        logging: false,
-        // Fix oklch error: paksa background putih hex, bukan CSS variable
-        backgroundColor: "#ffffff",
-        windowWidth: 794,
-        // Override warna yang mungkin pakai oklch dari Tailwind
-        onclone: (clonedDoc) => {
-          // Paksa semua elemen di PDF clone pakai warna aman
-          const allEls = clonedDoc.querySelectorAll("*");
-          allEls.forEach((el) => {
-            const style = el.style;
-            // Reset background yang mungkin inherit oklch dari root
-            if (!style.background && !style.backgroundColor) {
-              el.style.backgroundColor = "transparent";
-            }
-          });
-          // Paksa root background putih
-          clonedDoc.documentElement.style.background = "#ffffff";
-          clonedDoc.body.style.background = "#ffffff";
-        },
-      });
-
-      element.style.display = "none";
-
-      const imgData = canvas.toDataURL("image/png");
-      const pdf = new jsPDF({ orientation: "portrait", unit: "mm", format: "a4" });
-
-      const pdfWidth = pdf.internal.pageSize.getWidth();
-      const pdfHeight = pdf.internal.pageSize.getHeight();
-      const imgWidth = pdfWidth;
-      const imgHeight = (canvas.height * pdfWidth) / canvas.width;
-
-      let yOffset = 0;
-      while (yOffset < imgHeight) {
-        if (yOffset > 0) pdf.addPage();
-        pdf.addImage(imgData, "PNG", 0, -yOffset, imgWidth, imgHeight);
-        yOffset += pdfHeight;
+    <style>{`
+      @media print {
+        /* Reset & Base */
+        * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+        }
+        
+        body {
+          font-family: 'Montserrat', 'Segoe UI', system-ui, -apple-system, sans-serif;
+          background: white;
+          padding: 0;
+          margin: 0;
+        }
+        
+        /* Container utama print */
+        .print-container {
+          max-width: 794px;
+          margin: 0 auto;
+          padding: 60px 60px;
+          background: white;
+          color: #0f172a;
+        }
+        
+        /* Header */
+        .print-header {
+          margin-bottom: 36px;
+          padding-bottom: 24px;
+          border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .print-badge {
+          font-size: 10px;
+          font-weight: 700;
+          letter-spacing: 1.5px;
+          color: #7c3aed;
+          margin-bottom: 12px;
+        }
+        
+        .print-title {
+          font-size: 32px;
+          font-weight: 900;
+          margin: 8px 0 12px;
+          color: #0f172a;
+          line-height: 1.2;
+        }
+        
+        .print-description {
+          font-size: 14px;
+          line-height: 1.6;
+          color: #64748b;
+          max-width: 600px;
+        }
+        
+        /* Section Label */
+        .print-section-label {
+          font-size: 10px;
+          font-weight: 700;
+          text-transform: uppercase;
+          letter-spacing: 1.5px;
+          color: #94a3b8;
+          margin: 32px 0 16px 0;
+        }
+        
+        /* Career Items */
+        .print-career-item {
+          display: flex;
+          gap: 20px;
+          margin-bottom: 24px;
+        }
+        
+        .print-match-badge {
+          width: 56px;
+          height: 56px;
+          border-radius: 50%;
+          background: #ede9fe;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          flex-shrink: 0;
+        }
+        
+        .print-match-percent {
+          font-size: 16px;
+          font-weight: 800;
+          color: #7c3aed;
+          line-height: 1;
+        }
+        
+        .print-match-label {
+          font-size: 8px;
+          font-weight: 500;
+          color: #7c3aed;
+          margin-top: 2px;
+        }
+        
+        .print-career-content {
+          flex: 1;
+        }
+        
+        .print-career-title {
+          font-size: 16px;
+          font-weight: 700;
+          color: #0f172a;
+          margin-bottom: 6px;
+        }
+        
+        .print-career-desc {
+          font-size: 13px;
+          line-height: 1.5;
+          color: #64748b;
+          margin-bottom: 10px;
+        }
+        
+        .print-career-tags {
+          display: flex;
+          gap: 8px;
+          flex-wrap: wrap;
+        }
+        
+        .print-salary-tag {
+          font-size: 11px;
+          font-weight: 600;
+          background: rgba(16, 185, 129, 0.1);
+          color: #10b981;
+          padding: 4px 10px;
+          border-radius: 6px;
+          display: inline-flex;
+          align-items: center;
+          gap: 4px;
+        }
+        
+        .print-demand-tag {
+          font-size: 11px;
+          background: #f1f5f9;
+          color: #64748b;
+          padding: 4px 10px;
+          border-radius: 6px;
+        }
+        
+        /* Skill Grid */
+        .print-skill-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 16px;
+        }
+        
+        .print-skill-card {
+          background: #f8fafc;
+          padding: 16px;
+          border-radius: 12px;
+        }
+        
+        .print-skill-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 10px;
+        }
+        
+        .print-skill-name {
+          font-size: 14px;
+          font-weight: 700;
+          color: #0f172a;
+        }
+        
+        .print-skill-level {
+          font-size: 9px;
+          font-weight: 700;
+          text-transform: uppercase;
+          padding: 4px 10px;
+          border-radius: 20px;
+        }
+        
+        .print-skill-desc {
+          font-size: 12px;
+          line-height: 1.5;
+          color: #64748b;
+        }
+        
+        /* Major Items */
+        .print-major-item {
+          margin-bottom: 20px;
+        }
+        
+        .print-major-name {
+          font-size: 15px;
+          font-weight: 700;
+          color: #0f172a;
+          margin-bottom: 6px;
+        }
+        
+        .print-major-reason {
+          font-size: 12px;
+          line-height: 1.5;
+          color: #64748b;
+          margin-bottom: 8px;
+        }
+        
+        .print-uni-tag {
+          font-size: 10px;
+          background: #ede9fe;
+          color: #6d28d9;
+          padding: 4px 10px;
+          border-radius: 6px;
+          display: inline-block;
+          margin-right: 8px;
+          margin-bottom: 4px;
+        }
+        
+        /* UMKM Items */
+        .print-umkm-item {
+          margin-bottom: 16px;
+        }
+        
+        .print-umkm-sector {
+          font-size: 14px;
+          font-weight: 600;
+          color: #0f172a;
+          margin-bottom: 4px;
+        }
+        
+        .print-umkm-idea {
+          font-size: 12px;
+          line-height: 1.5;
+          color: #64748b;
+        }
+        
+        /* Roadmap */
+        .print-roadmap-container {
+          display: flex;
+          gap: 12px;
+        }
+        
+        .print-roadmap-year {
+          flex: 1;
+          background: #f8fafc;
+          border-radius: 12px;
+          padding: 14px;
+        }
+        
+        .print-year-number {
+          width: 28px;
+          height: 28px;
+          background: #7c3aed;
+          color: white;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 12px;
+          font-weight: 800;
+          margin-bottom: 12px;
+        }
+        
+        .print-year-title {
+          font-size: 11px;
+          font-weight: 700;
+          color: #7c3aed;
+          text-transform: uppercase;
+          margin-bottom: 10px;
+        }
+        
+        .print-roadmap-skill {
+          font-size: 10px;
+          color: #4b5563;
+          margin-bottom: 6px;
+          padding-left: 12px;
+          position: relative;
+        }
+        
+        .print-roadmap-skill::before {
+          content: "•";
+          position: absolute;
+          left: 0;
+          color: #7c3aed;
+        }
+        
+        /* Footer */
+        .print-footer {
+          margin-top: 48px;
+          padding-top: 24px;
+          border-top: 1px solid #e2e8f0;
+        }
+        
+        .print-message {
+          font-size: 13px;
+          font-style: italic;
+          color: #5b21b6;
+          background: #ede9fe;
+          padding: 16px 20px;
+          border-radius: 12px;
+          margin-bottom: 24px;
+          text-align: center;
+        }
+        
+        .print-credit {
+          font-size: 9px;
+          color: #94a3b8;
+          text-align: center;
+        }
+        
+        .print-divider {
+          height: 1px;
+          background: #e2e8f0;
+          margin: 32px 0;
+        }
+        
+        /* Hide non-print elements */
+        .no-print {
+          display: none;
+        }
+        
+        /* Ensure proper page breaks */
+        .print-page-break {
+          page-break-before: avoid;
+          page-break-after: avoid;
+        }
       }
-
-      const slug = (result.personalityType || "Hasil").replace(/\s+/g, "-");
-      pdf.save(`Edutech-${slug}.pdf`);
-    } catch (err) {
-      console.error(err);
-      alert("Gagal membuat PDF.");
-    } finally {
-      setDownloading(false);
-    }
-  };
-
-  return { downloading, handleDownload, printRef };
+    `}</style>
+  );
 }
 
 // ─── MAIN COMPONENT ───────────────────────────────────────────────────────────
@@ -363,8 +394,8 @@ export default function ResultPage({ result, onRetry }) {
   const [roadmapOpen, setRoadmapOpen] = useState(false);
   const [selectedCareer, setSelectedCareer] = useState(null);
   const [selectedMajor, setSelectedMajor] = useState(null);
+  const [downloading, setDownloading] = useState(false);
   const navigate = useNavigate();
-  const { downloading, handleDownload, printRef } = usePDFDownload(result);
 
   const avatarUrl = getAvatarUrl(result?.personalityType || "default");
 
@@ -373,6 +404,481 @@ export default function ResultPage({ result, onRetry }) {
     result.personalityType &&
     Array.isArray(result.topCareers) &&
     result.topCareers.length > 0;
+
+  const handleDownloadPDF = () => {
+    if (downloading) return;
+    setDownloading(true);
+
+    try {
+      // Buat hidden div untuk print
+      const printDiv = document.createElement('div');
+      printDiv.style.position = 'fixed';
+      printDiv.style.top = '-9999px';
+      printDiv.style.left = '-9999px';
+      printDiv.innerHTML = `
+        <div class="print-container">
+          <!-- Header -->
+          <div class="print-header">
+            <div class="print-badge">AI CAREER TEST · EDUTECH</div>
+            <h1 class="print-title">${escapeHtml(result.personalityType)}</h1>
+            <div class="print-description">${escapeHtml(result.personalityDescription)}</div>
+          </div>
+
+          <!-- Careers -->
+          <div class="print-section-label">Peluang Karir Terbaik</div>
+          ${result.topCareers?.map(career => `
+            <div class="print-career-item">
+              <div class="print-match-badge">
+                <div class="print-match-percent">${career.match}%</div>
+                <div class="print-match-label">cocok</div>
+              </div>
+              <div class="print-career-content">
+                <div class="print-career-title">${escapeHtml(career.title)}</div>
+                <div class="print-career-desc">${escapeHtml(career.description)}</div>
+                <div class="print-career-tags">
+                  ${career.avgSalary ? `<span class="print-salary-tag">${escapeHtml(career.avgSalary)}</span>` : ''}
+                  ${career.industryDemand ? `<span class="print-demand-tag">Prospek kerja: ${escapeHtml(career.industryDemand)}</span>` : ''}
+                </div>
+              </div>
+            </div>
+          `).join('')}
+
+          <div class="print-divider"></div>
+
+          <!-- Skills -->
+          <div class="print-section-label">Skill yang Perlu Dikembangkan</div>
+          <div class="print-skill-grid">
+            ${result.skillGaps?.map(skill => `
+              <div class="print-skill-card">
+                <div class="print-skill-header">
+                  <div class="print-skill-name">${escapeHtml(skill.skill)}</div>
+                  <div class="print-skill-level" style="background: ${skill.targetLevel === 'Penting' ? '#fee2e2' : '#fef3c7'}; color: ${skill.targetLevel === 'Penting' ? '#b91c1c' : '#b45309'}">
+                    ${escapeHtml(skill.targetLevel)}
+                  </div>
+                </div>
+                <div class="print-skill-desc">${escapeHtml(skill.howToLearn)}</div>
+              </div>
+            `).join('')}
+          </div>
+
+          <div class="print-divider"></div>
+
+          <!-- Majors -->
+          <div class="print-section-label">Rekomendasi Jurusan Kuliah</div>
+          ${result.recommendedMajors?.map(major => `
+            <div class="print-major-item">
+              <div class="print-major-name">${escapeHtml(major.name)}</div>
+              <div class="print-major-reason">${escapeHtml(major.reason)}</div>
+              <div>
+                ${major.universities?.slice(0, 3).map(uni => `<span class="print-uni-tag">${escapeHtml(uni)}</span>`).join('')}
+              </div>
+            </div>
+          `).join('')}
+
+          <div class="print-divider"></div>
+
+          <!-- UMKM -->
+          <div class="print-section-label">Ide Wirausaha & UMKM</div>
+          ${result.umkmOpportunities?.map(item => `
+            <div class="print-umkm-item">
+              <div class="print-umkm-sector">${escapeHtml(item.sector)}</div>
+              <div class="print-umkm-idea">${escapeHtml(item.startupIdea)}</div>
+            </div>
+          `).join('')}
+
+          <div class="print-divider"></div>
+
+          <!-- Roadmap -->
+          <div class="print-section-label">Rencana Pengembangan Skill (5 Tahun)</div>
+          <div class="print-roadmap-container">
+            ${Object.entries(result.skillRoadmap || {}).map(([year, skills], idx) => `
+              <div class="print-roadmap-year">
+                <div class="print-year-number">${idx + 1}</div>
+                <div class="print-year-title">Tahun ${idx + 1}</div>
+                ${(Array.isArray(skills) ? skills : []).slice(0, 4).map(skill => `
+                  <div class="print-roadmap-skill">${escapeHtml(skill)}</div>
+                `).join('')}
+              </div>
+            `).join('')}
+          </div>
+
+          <!-- Footer -->
+          <div class="print-footer">
+            ${result.motivationalMessage ? `
+              <div class="print-message">
+                "${escapeHtml(result.motivationalMessage)}"
+              </div>
+            ` : ''}
+            <div class="print-credit">
+              Dibuat oleh Edutech AI Career Test · ${new Date().toLocaleDateString('id-ID', { year: 'numeric', month: 'long' })}
+            </div>
+          </div>
+        </div>
+      `;
+
+      document.body.appendChild(printDiv);
+
+      // Buka jendela print
+      const printWindow = window.open('', '_blank');
+      printWindow.document.write(`
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <title>Edutech - ${result.personalityType}</title>
+          <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+          <style>
+            /* Copy all print styles here */
+            ${getPrintStyles()}
+          </style>
+        </head>
+        <body>
+          ${printDiv.innerHTML}
+        </body>
+        </html>
+      `);
+      
+      printWindow.document.close();
+      
+      // Tunggu font dan gambar load
+      printWindow.onload = () => {
+        setTimeout(() => {
+          printWindow.print();
+          setTimeout(() => {
+            printWindow.close();
+            document.body.removeChild(printDiv);
+            setDownloading(false);
+          }, 500);
+        }, 500);
+      };
+      
+    } catch (err) {
+      console.error("PDF Error:", err);
+      alert("Gagal membuat PDF: " + err.message);
+      setDownloading(false);
+    }
+  };
+
+  // Helper function untuk escape HTML
+  const escapeHtml = (text) => {
+    if (!text) return '';
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+  };
+
+  // Function untuk mendapatkan print styles
+  const getPrintStyles = () => {
+    return `
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      
+      body {
+        font-family: 'Montserrat', 'Segoe UI', system-ui, -apple-system, sans-serif;
+        background: white;
+        padding: 0;
+        margin: 0;
+      }
+      
+      .print-container {
+        max-width: 794px;
+        margin: 0 auto;
+        padding: 60px 60px;
+        background: white;
+        color: #0f172a;
+      }
+      
+      .print-header {
+        margin-bottom: 36px;
+        padding-bottom: 24px;
+        border-bottom: 1px solid #e2e8f0;
+      }
+      
+      .print-badge {
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 1.5px;
+        color: #7c3aed;
+        margin-bottom: 12px;
+      }
+      
+      .print-title {
+        font-size: 32px;
+        font-weight: 900;
+        margin: 8px 0 12px;
+        color: #0f172a;
+        line-height: 1.2;
+      }
+      
+      .print-description {
+        font-size: 14px;
+        line-height: 1.6;
+        color: #64748b;
+        max-width: 600px;
+      }
+      
+      .print-section-label {
+        font-size: 10px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        color: #94a3b8;
+        margin: 32px 0 16px 0;
+      }
+      
+      .print-career-item {
+        display: flex;
+        gap: 20px;
+        margin-bottom: 24px;
+      }
+      
+      .print-match-badge {
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        background: #ede9fe;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+      
+      .print-match-percent {
+        font-size: 16px;
+        font-weight: 800;
+        color: #7c3aed;
+        line-height: 1;
+      }
+      
+      .print-match-label {
+        font-size: 8px;
+        font-weight: 500;
+        color: #7c3aed;
+        margin-top: 2px;
+      }
+      
+      .print-career-content {
+        flex: 1;
+      }
+      
+      .print-career-title {
+        font-size: 16px;
+        font-weight: 700;
+        color: #0f172a;
+        margin-bottom: 6px;
+      }
+      
+      .print-career-desc {
+        font-size: 13px;
+        line-height: 1.5;
+        color: #64748b;
+        margin-bottom: 10px;
+      }
+      
+      .print-career-tags {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+      
+      .print-salary-tag {
+        font-size: 11px;
+        font-weight: 600;
+        background: rgba(16, 185, 129, 0.1);
+        color: #10b981;
+        padding: 4px 10px;
+        border-radius: 6px;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+      }
+      
+      .print-demand-tag {
+        font-size: 11px;
+        background: #f1f5f9;
+        color: #64748b;
+        padding: 4px 10px;
+        border-radius: 6px;
+      }
+      
+      .print-skill-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+      
+      .print-skill-card {
+        background: #f8fafc;
+        padding: 16px;
+        border-radius: 12px;
+      }
+      
+      .print-skill-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+      }
+      
+      .print-skill-name {
+        font-size: 14px;
+        font-weight: 700;
+        color: #0f172a;
+      }
+      
+      .print-skill-level {
+        font-size: 9px;
+        font-weight: 700;
+        text-transform: uppercase;
+        padding: 4px 10px;
+        border-radius: 20px;
+      }
+      
+      .print-skill-desc {
+        font-size: 12px;
+        line-height: 1.5;
+        color: #64748b;
+      }
+      
+      .print-major-item {
+        margin-bottom: 20px;
+      }
+      
+      .print-major-name {
+        font-size: 15px;
+        font-weight: 700;
+        color: #0f172a;
+        margin-bottom: 6px;
+      }
+      
+      .print-major-reason {
+        font-size: 12px;
+        line-height: 1.5;
+        color: #64748b;
+        margin-bottom: 8px;
+      }
+      
+      .print-uni-tag {
+        font-size: 10px;
+        background: #ede9fe;
+        color: #6d28d9;
+        padding: 4px 10px;
+        border-radius: 6px;
+        display: inline-block;
+        margin-right: 8px;
+        margin-bottom: 4px;
+      }
+      
+      .print-umkm-item {
+        margin-bottom: 16px;
+      }
+      
+      .print-umkm-sector {
+        font-size: 14px;
+        font-weight: 600;
+        color: #0f172a;
+        margin-bottom: 4px;
+      }
+      
+      .print-umkm-idea {
+        font-size: 12px;
+        line-height: 1.5;
+        color: #64748b;
+      }
+      
+      .print-roadmap-container {
+        display: flex;
+        gap: 12px;
+      }
+      
+      .print-roadmap-year {
+        flex: 1;
+        background: #f8fafc;
+        border-radius: 12px;
+        padding: 14px;
+      }
+      
+      .print-year-number {
+        width: 28px;
+        height: 28px;
+        background: #7c3aed;
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+        font-weight: 800;
+        margin-bottom: 12px;
+      }
+      
+      .print-year-title {
+        font-size: 11px;
+        font-weight: 700;
+        color: #7c3aed;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+      }
+      
+      .print-roadmap-skill {
+        font-size: 10px;
+        color: #4b5563;
+        margin-bottom: 6px;
+        padding-left: 12px;
+        position: relative;
+      }
+      
+      .print-roadmap-skill::before {
+        content: "•";
+        position: absolute;
+        left: 0;
+        color: #7c3aed;
+      }
+      
+      .print-footer {
+        margin-top: 48px;
+        padding-top: 24px;
+        border-top: 1px solid #e2e8f0;
+      }
+      
+      .print-message {
+        font-size: 13px;
+        font-style: italic;
+        color: #5b21b6;
+        background: #ede9fe;
+        padding: 16px 20px;
+        border-radius: 12px;
+        margin-bottom: 24px;
+        text-align: center;
+      }
+      
+      .print-credit {
+        font-size: 9px;
+        color: #94a3b8;
+        text-align: center;
+      }
+      
+      .print-divider {
+        height: 1px;
+        background: #e2e8f0;
+        margin: 32px 0;
+      }
+      
+      @media print {
+        @page {
+          size: A4;
+          margin: 0;
+        }
+        body {
+          margin: 0;
+          padding: 0;
+        }
+      }
+    `;
+  };
 
   if (!isDataReady) {
     return (
@@ -423,28 +929,7 @@ export default function ResultPage({ result, onRetry }) {
   return (
     <div className="pt-12 relative min-h-screen antialiased overflow-x-hidden bg-neutral-50 dark:bg-background text-slate-900 dark:text-white transition-colors duration-300">
 
-      {/* ── PDF CONTAINER (hidden, no oklch colors) ── */}
-      <div ref={printRef} style={{ display: "none" }}>
-        <style>{`
-          @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&display=swap');
-          * { box-sizing: border-box; }
-        `}</style>
-        <div style={pdfStyles.container}>
-          <PdfHeader result={result} />
-          <PdfCareerSection careers={result.topCareers} />
-          <div style={pdfStyles.divider} />
-          <PdfSkillSection skills={result.skillGaps} />
-          <div style={pdfStyles.divider} />
-          <PdfMajorSection majors={result.recommendedMajors} />
-          <div style={pdfStyles.divider} />
-          <PdfUmkmSection items={result.umkmOpportunities} />
-          <div style={pdfStyles.divider} />
-          <PdfRoadmapSection roadmap={result.skillRoadmap} />
-          <PdfFooter message={result.motivationalMessage} />
-        </div>
-      </div>
-
-      {/* ── WEB VIEW ── */}
+      {/* WEB VIEW */}
       <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-5 lg:px-8 pt-10 sm:pt-14 pb-24">
 
         {/* HERO */}
@@ -681,12 +1166,12 @@ export default function ResultPage({ result, onRetry }) {
                 <HiRefresh className="w-4 h-4 transition-transform duration-500 group-hover:rotate-180" /> Ulangi Tes
               </button>
               <button
-                onClick={handleDownload}
+                onClick={handleDownloadPDF}
                 disabled={downloading}
                 className="inline-flex items-center gap-2 p-4 rounded-xl text-sm font-semibold bg-violet-600 dark:bg-violet-500/20 text-white dark:text-violet-300 hover:bg-violet-700 dark:hover:bg-violet-500/25 hover:text-white dark:hover:text-violet-200 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 active:scale-95 group cursor-pointer"
               >
                 <HiDownload className={`w-4 h-4 transition-transform duration-300 ${downloading ? "animate-bounce" : "group-hover:translate-y-0.5"}`} />
-                {downloading ? "Membuat PDF..." : "Download PDF"}
+                {downloading ? "Membuat hasil analisi..." : "Cetak hasil analisis"}
               </button>
             </div>
           </div>

@@ -14,6 +14,7 @@ import CareerDetailPage from "./pages/explore/CareerDetailPage"
 import ExploreEducation from "./pages/explore/ExploreEducation"
 import EducationDetailPage from "./pages/explore/EducationDetailPage"
 import ScrollToTopButton from "./components/ui/ScrollToTopButton"
+import ScrolltoTop from "./components/feature/ScrolltoTop"
 
 function AOSInitializer() {
   const location = useLocation()
@@ -36,14 +37,12 @@ function AOSInitializer() {
 }
 
 export default function App() {
-
-  //app
   return (
     <LanguageProvider>
 
       <Router>
         <AOSInitializer />
-        <ScrolltoTop/> //buat scroll ke atas tiap ganti halaman, biar ga bingung sendiri :D
+        <ScrolltoTop />
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />

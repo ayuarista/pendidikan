@@ -22,7 +22,7 @@ const FEATURES = [
   { 
     icon: HiDownload,   
     label: "Unduh Hasil Analisis",      
-    desc: "File PDF yang bisa kamu simpan",   
+    desc: "Hasil analisis yang bisa kamu simpan",   
     color: "dark:text-emerald-400 dark:bg-emerald-400/10 dark:border-emerald-400/20 text-emerald-600 bg-emerald-50 border-emerald-200" 
   },
 ];
