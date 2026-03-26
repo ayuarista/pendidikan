@@ -2,6 +2,7 @@ import { useState, useRef } from "react";
 import { HiArrowLeft, HiArrowRight, HiSparkles, HiCheckCircle } from "react-icons/hi";
 import { QUESTIONS } from "../../config/aiConfig";
 
+//aa
 const TOTAL_BLOCKS = 5;
 
 // Helper untuk grouping soal
