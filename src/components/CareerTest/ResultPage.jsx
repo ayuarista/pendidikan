@@ -28,7 +28,13 @@ function getPersonalityIcon(type = "") {
   return HiSparkles;
 }
 
-// ─── ATOMS ────────────────────────────────────────────────────────────────────
+// Helper untuk generate Avatar URL (DiceBear Avataaars)
+function getAvatarUrl(type) {
+  const seed = type.replace(/\s+/g, "-");
+  // Style: avataaars (flat illustration), background: solid soft color
+  return `https://api.dicebear.com/6.x/avataaars/svg?seed=${seed}&backgroundColor=ffdfbf`;
+}
+
 function Bar({ pct, color, trackColor = "bg-neutral-200 dark:bg-white/[0.06]", delay = 0 }) {
   const [w, setW] = useState(0);
   useEffect(() => { const t = setTimeout(() => setW(pct), 350 + delay); return () => clearTimeout(t); }, [pct]);
@@ -169,6 +175,7 @@ export default function ResultPage({ result, onRetry }) {
             {result.personalityDescription}
           </p>
         </FadeUp>
+
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
           {/* ── KARIR ── */}
           <FadeUp delay={120} className="col-span-2 row-span-2">
@@ -238,7 +245,7 @@ export default function ResultPage({ result, onRetry }) {
               ))}
             </div>
           </FadeUp>
-          {/* ── JURUSAN + UMKM ── */}
+
           <FadeUp delay={240}>
             <div className="grid grid-cols-1 gap-12">
               <div>

@@ -1,14 +1,3 @@
-const LEVEL_COLOR = {
-  Pemula: "#64748b",
-  Menengah: "#3b82f6",
-  Mahir: "#10b981",
-  Expert: "#f59e0b",
-};
-
-const LEVEL_PCT = {
-  Pemula: 25, Menengah: 50, Mahir: 75, Expert: 100,
-};
-
 export default function PDFResult({ result }) {
   const name = result.personalityType || "Hasil";
 

@@ -36,6 +36,8 @@ function AOSInitializer() {
 }
 
 export default function App() {
+
+  //app
   return (
     <LanguageProvider>
 
