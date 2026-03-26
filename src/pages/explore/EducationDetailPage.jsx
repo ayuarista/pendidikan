@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
-import { getMajorBySlug, DEMAND_LEVEL } from "../../data/educationData"; // Adjust path as needed
+import { getMajorBySlug, getMajorByName, buildMajorFallback, DEMAND_LEVEL } from "../../data/educationData"; // Adjust path as needed
 import { HiArrowLeft, HiLightBulb, HiBriefcase } from "react-icons/hi";
 
 const TIP_COLORS = ["#f59e0b", "#8b5cf6", "#10b981"];
@@ -21,8 +21,16 @@ export default function EducationDetailPage({ major: majorProp, onBack }) {
   const { slug } = useParams() || {};
   const navigate = useNavigate?.() || null;
   const location = useLocation?.() || null;
+  const locationState = location?.state || {};
+  const fallbackSource = majorProp || locationState.majorFallback || null;
 
-  const d = majorProp || getMajorBySlug(slug);
+  // 1. Coba dari DB via slug
+  // 2. Kalau ada majorProp (dari AI test), coba cari di DB by name dulu
+  // 3. Kalau tidak ketemu di DB tapi ada majorProp → buildMajorFallback
+  // 4. Kalau tidak ada sama sekali → null (tampil not found)
+  const fromDb = getMajorBySlug(slug) || (fallbackSource ? getMajorByName(fallbackSource.name) : null);
+  const d = fromDb || (fallbackSource ? buildMajorFallback(fallbackSource) : null);
+
   const demand = d ? (DEMAND_LEVEL[d.demand] || DEMAND_LEVEL["Sedang"]) : null;
 
   // ─── Set Page Title ────────────────────────────────────────────────────────
@@ -42,21 +50,16 @@ export default function EducationDetailPage({ major: majorProp, onBack }) {
 
   // ─── Navigation Logic ──────────────────────────────────────────────────────
   const handleBack = () => {
-    // If accessed via prop component (modal flow)
-    if (onBack) {
-      onBack();
-      return;
-    }
+    if (onBack) { onBack(); return; }
 
-    // Check navigation state
-    const from = location?.state?.from;
+    // Baca dari sessionStorage sebagai fallback kalau state hilang
+    const from = location?.state?.from || sessionStorage.getItem("edu_detail_from");
+    sessionStorage.removeItem("edu_detail_from"); // cleanup
 
-    if (from === 'ai-career-test') {
-      // If came from result page, go back to that page
+    if (from === "ai-career-test") {
       navigate(-1);
     } else {
-      // If came from explore or direct access, go to explore page
-      navigate("/explore-education", { replace: true });
+      navigate("/explore-education");
     }
   };
 
@@ -166,12 +169,12 @@ export default function EducationDetailPage({ major: majorProp, onBack }) {
           >
             <HiArrowLeft className="size-4" /> Kembali
           </button>
-                      <span
-              className="text-[11px] font-bold px-3 py-1.5 rounded-xl bg-white/80 dark:bg-black/50 backdrop-blur-md"
-              style={{ color: d.accentColor }}
-            >
-              {d.degree}
-            </span>
+          <span
+            className="text-[11px] font-bold px-3 py-1.5 rounded-xl bg-white/80 dark:bg-black/50 backdrop-blur-md"
+            style={{ color: d.accentColor }}
+          >
+            {d.degree}
+          </span>
         </div>
 
         {/* title */}

@@ -1162,6 +1162,94 @@ export function getMajorByName(name) {
   );
 }
 
+export function buildMajorFallback(major) {
+  const name = major?.name || major?.title || "Jurusan Ini";
+  const t = name.toLowerCase();
+
+  const accentColor =
+    /teknik|engineering|komputer|informatika|sistem|teknologi|digital/.test(t) ? "#6366f1"
+    : /bisnis|manajemen|ekonomi|akuntansi|keuangan/.test(t) ? "#f59e0b"
+    : /desain|seni|arsitektur|komunikasi|media/.test(t) ? "#ec4899"
+    : /kedokteran|kesehatan|farmasi|keperawatan|gizi/.test(t) ? "#10b981"
+    : /hukum|ilmu politik|hubungan internasional|administrasi/.test(t) ? "#3b82f6"
+    : /psikologi|sosial|pendidikan|sosiologi/.test(t) ? "#8b5cf6"
+    : "#8b5cf6";
+
+  const category =
+    /teknik|engineering|komputer|informatika|sistem|teknologi/.test(t) ? "Teknologi"
+    : /bisnis|manajemen|ekonomi|akuntansi/.test(t) ? "Bisnis & Ekonomi"
+    : /desain|seni|arsitektur|komunikasi/.test(t) ? "Seni & Desain"
+    : /kedokteran|kesehatan|farmasi/.test(t) ? "Kesehatan"
+    : /hukum|politik/.test(t) ? "Hukum & Sosial"
+    : /psikologi|sosial|pendidikan/.test(t) ? "Sosial & Pendidikan"
+    : "Ilmu Terapan";
+
+  return {
+    slug: t.replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, ""),
+    name,
+    category,
+    degree: "S1",
+    accentColor,
+    img: null,
+    tagline: `${name} adalah program studi yang relevan dan banyak dibutuhkan di industri Indonesia saat ini.`,
+    shortDesc: `Program studi ${name} mempersiapkan lulusan yang kompeten dan siap bersaing di dunia kerja maupun melanjutkan studi.`,
+    about: `Program studi ${name} dirancang untuk membentuk lulusan yang kompeten secara teknis dan adaptif terhadap perubahan industri. Kamu akan mempelajari fondasi keilmuan yang kuat sekaligus mengasah kemampuan praktis melalui proyek nyata, studi kasus, dan kolaborasi tim. Lulusan program ini dikenal fleksibel dan banyak dicari di berbagai sektor.`,
+    duration: "4 tahun",
+    salaryRange: major?.salaryRange || "Rp 5–25 jt/bln",
+    demand: major?.demand || "Tinggi",
+    subjects: [
+      `Pengantar ${name}`,
+      "Metodologi Penelitian",
+      "Statistika & Analisis Data",
+      "Etika Profesi",
+      "Manajemen Proyek",
+      "Komunikasi Bisnis",
+    ],
+    skills: [
+      "Analisis & Problem Solving",
+      "Komunikasi Efektif",
+      "Kolaborasi Tim",
+      "Manajemen Waktu",
+      "Pemikiran Kritis",
+      "Adaptabilitas",
+    ],
+    careers: [
+      `Spesialis ${name}`,
+      "Konsultan",
+      "Peneliti & Analis",
+      "Manajer Proyek",
+      "Wirausahawan",
+      "Akademisi",
+    ],
+    universities: [
+      "Universitas Indonesia",
+      "Universitas Gadjah Mada",
+      "Institut Teknologi Bandung",
+      "Universitas Diponegoro",
+      "Universitas Brawijaya",
+    ],
+    tools: [
+      { name: "Google Workspace", use: "Kolaborasi dokumen & produktivitas" },
+      { name: "Notion / Trello", use: "Manajemen proyek & tugas" },
+      { name: "Zoom / Meet", use: "Rapat virtual & presentasi" },
+      { name: "Microsoft Office", use: "Dokumen & presentasi profesional" },
+    ],
+    path: [
+      { level: "Junior", dur: "0–2 tahun", salary: "Rp 4–8 jt" },
+      { level: "Mid-Level", dur: "2–5 tahun", salary: major?.salaryRange || "Rp 10–20 jt" },
+      { level: "Senior", dur: "5–8 tahun", salary: "Rp 20–40 jt" },
+      { level: "Lead / Manager", dur: "8+ tahun", salary: "Rp 40 jt+" },
+    ],
+    env: `Lulusan ${name} bekerja di berbagai sektor industri dengan lingkungan kerja yang dinamis dan terus berkembang.`,
+    tips: [
+      `Pelajari kurikulum dan spesialisasi tiap universitas — program ${name} bisa sangat berbeda antar kampus.`,
+      "Cari akreditasi Unggul untuk membuka peluang beasiswa, karir, dan studi lanjut yang lebih luas.",
+      "Bergabunglah dengan komunitas mahasiswa atau alumni di LinkedIn untuk gambaran nyata dunia kerja.",
+    ],
+    isFallback: true,
+  };
+}
+
 export const DEMAND_LEVEL = {
   "Sangat Tinggi": { color: "#10b981", bg: "rgba(16,185,129,0.10)" },
   "Tinggi":        { color: "#60a5fa", bg: "rgba(96,165,250,0.10)" },

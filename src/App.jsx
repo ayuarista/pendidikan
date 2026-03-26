@@ -11,12 +11,13 @@ import ExploreCareer from "./pages/explore/ExploreCareer"
 import CareerDetailPage from "./pages/explore/CareerDetailPage"
 import ExploreEducation from "./pages/explore/ExploreEducation"
 import EducationDetailPage from "./pages/explore/EducationDetailPage"
+import ScrolltoTop from "./components/feature/ScrolltoTop"
 
 export default function App() {
   return (
     <LanguageProvider>
-
       <Router>
+        <ScrolltoTop/>
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />

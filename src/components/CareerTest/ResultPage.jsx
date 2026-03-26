@@ -11,6 +11,7 @@ import {
 import { LuMessageCircleHeart } from "react-icons/lu";
 import { FaMoneyBill } from "react-icons/fa";
 import CareerDetailPage from "../../pages/explore/CareerDetailPage";
+import EducationDetailPage from "../../pages/explore/EducationDetailPage";
 
 function getPersonalityIcon(type = "") {
   const t = type.toLowerCase();
@@ -59,42 +60,42 @@ function Div() {
 }
 
 const pdfStyles = {
-  container: { 
+  container: {
     width: "794px", // A4 width at 96 DPI
-    background: "#ffffff", 
+    background: "#ffffff",
     padding: "60px 60px", // Margin lebih besar
-    boxSizing: "border-box", 
+    boxSizing: "border-box",
     fontFamily: "'Montserrat', 'Segoe UI', sans-serif",
     color: "#0f172a"
   },
-  header: { 
-    borderBottom: "3px solid #3b82f6", 
-    paddingBottom: "24px", 
-    marginBottom: "36px" 
+  header: {
+    borderBottom: "3px solid #3b82f6",
+    paddingBottom: "24px",
+    marginBottom: "36px"
   },
-  title: { 
-    fontSize: "32px", 
-    fontWeight: "900", 
-    margin: "8px 0 12px", 
-    color: "#0f172a" 
+  title: {
+    fontSize: "32px",
+    fontWeight: "900",
+    margin: "8px 0 12px",
+    color: "#0f172a"
   },
-  sectionLabel: { 
-    fontSize: "10px", 
-    fontWeight: "700", 
-    textTransform: "uppercase", 
-    letterSpacing: "0.15em", 
-    color: "#94a3b8", 
-    marginBottom: "16px" 
+  sectionLabel: {
+    fontSize: "10px",
+    fontWeight: "700",
+    textTransform: "uppercase",
+    letterSpacing: "0.15em",
+    color: "#94a3b8",
+    marginBottom: "16px"
   },
-  divider: { 
-    height: "1px", 
-    background: "#e2e8f0", 
-    margin: "32px 0" 
+  divider: {
+    height: "1px",
+    background: "#e2e8f0",
+    margin: "32px 0"
   },
-  grid2: { 
-    display: "grid", 
-    gridTemplateColumns: "1fr 1fr", 
-    gap: "16px" 
+  grid2: {
+    display: "grid",
+    gridTemplateColumns: "1fr 1fr",
+    gap: "16px"
   }
 };
 
@@ -155,7 +156,7 @@ function PdfSkillSection({ skills }) {
           <div key={i} style={{ background: "#f8fafc", padding: "16px", borderRadius: "12px", border: "1px solid #e2e8f0" }}>
             <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "8px" }}>
               <span style={{ fontWeight: "700", fontSize: "13px" }}>{s.skill}</span>
-              <span style={{ 
+              <span style={{
                 fontSize: "9px", fontWeight: "700", textTransform: "uppercase", padding: "2px 6px", borderRadius: "4px",
                 background: s.targetLevel === "Penting" ? "#fee2e2" : "#fef3c7",
                 color: s.targetLevel === "Penting" ? "#b91c1c" : "#b45309"
@@ -211,7 +212,7 @@ function PdfUmkmSection({ items }) {
 function PdfRoadmapSection({ roadmap }) {
   if (!roadmap) return null;
   const entries = Object.entries(roadmap);
-  
+
   return (
     <div style={{ marginBottom: "40px" }}>
       <p style={pdfStyles.sectionLabel}>Rencana Pengembangan Skill (5 Tahun)</p>
@@ -324,19 +325,63 @@ function usePDFDownload(result) {
 export default function ResultPage({ result, onRetry }) {
   const [roadmapOpen, setRoadmapOpen] = useState(false);
   const [selectedCareer, setSelectedCareer] = useState(null);
+  const [selectedMajor, setSelectedMajor] = useState(null);
   const navigate = useNavigate();
   const { downloading, handleDownload, printRef } = usePDFDownload(result);
-  
-  const PersonalityIcon = getPersonalityIcon(result.personalityType);
-  const avatarUrl = getAvatarUrl(result.personalityType || "default");
 
-  if (selectedCareer) {
-    return <CareerDetailPage career={selectedCareer} onBack={() => { setSelectedCareer(null); window.scrollTo({ top: 0, behavior: "smooth" }); }} />;
+  const PersonalityIcon = getPersonalityIcon(result?.personalityType || "");
+  const avatarUrl = getAvatarUrl(result?.personalityType || "default");
+
+  const isDataReady =
+    result &&
+    result.personalityType &&
+    Array.isArray(result.topCareers) &&
+    result.topCareers.length > 0;
+
+  if (!isDataReady) {
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center gap-4 bg-neutral-50 dark:bg-background text-slate-900 dark:text-white">
+        <HiSparkles className="w-8 h-8 text-violet-400 animate-pulse" />
+        <p className="text-sm font-medium text-slate-500 dark:text-white/40">
+          Data tidak tersedia. Silakan ulangi tes.
+        </p>
+        <button
+          onClick={onRetry}
+          className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold bg-neutral-100 dark:bg-white/5 text-slate-600 dark:text-white/40 hover:bg-neutral-200 dark:hover:bg-white/10 hover:text-slate-900 dark:hover:text-white transition-all cursor-pointer"
+        >
+          <HiRefresh className="w-4 h-4" /> Ulangi Tes
+        </button>
+      </div>
+    );
   }
 
-  const handleMajorClick = (majorName) => {
-    const slug = majorName.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
-    navigate(`/education/${slug}`);
+  if (selectedCareer) {
+    return (
+      <CareerDetailPage
+        career={selectedCareer}
+        onBack={() => {
+          setSelectedCareer(null);
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }}
+      />
+    );
+  }
+
+  if (selectedMajor) {
+    return (
+      <EducationDetailPage
+        major={selectedMajor}
+        onBack={() => {
+          setSelectedMajor(null);
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }}
+      />
+    );
+  }
+
+  const handleMajorClick = (m) => {
+    setSelectedMajor(m);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
@@ -369,13 +414,13 @@ export default function ResultPage({ result, onRetry }) {
         <FadeUp delay={60} className="flex flex-col items-center text-center mb-16">
           <div className="relative mb-6">
             <div className="absolute inset-0 rounded-full bg-orange-500/20 blur-xl opacity-50 transition-opacity" />
-            
+
             {/* AVATAR IMAGE (WEB ONLY) */}
             <div className="relative w-24 h-24 rounded-full overflow-hidden border-4 border-white dark:border-neutral-800 shadow-lg">
               <img src={avatarUrl} alt={result.personalityType} className="w-full h-full object-cover bg-neutral-200 dark:bg-neutral-700" />
             </div>
           </div>
-          
+
           <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-semibold mb-5 bg-emerald-100 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-300">
             <HiCheckCircle className="w-3.5 h-3.5" /> Hasil Analisis AI
           </span>
@@ -389,7 +434,7 @@ export default function ResultPage({ result, onRetry }) {
 
         {/* KONTEN WEB SEPERTI SEBELUMNYA... */}
         {/* (Saya ringkas pemanggilannya agar tidak memenuhi ruang, strukturnya sama persis dengan kode kamu yang lama) */}
-        
+
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
           {/* Karir */}
           <FadeUp delay={120} className="col-span-2 row-span-2">
@@ -427,7 +472,7 @@ export default function ResultPage({ result, onRetry }) {
           {/* Sidebar (Jurusan, UMKM, Roadmap) - Singkatnya saya tulis struktur ringkasnya */}
           <FadeUp delay={240}>
             <div className="grid grid-cols-1 gap-12">
-              
+
               {/* Jurusan */}
               <div>
                 <SLabel>Rekomendasi Jurusan</SLabel>
@@ -439,7 +484,7 @@ export default function ResultPage({ result, onRetry }) {
                       <div className="flex flex-wrap gap-1.5 mb-2.5">
                         {m.universities?.slice(0, 3).map((u, j) => <span key={j} className="text-[11px] px-2 py-0.5 rounded-md bg-blue-100 dark:bg-blue-500/10 text-blue-700 dark:text-blue-300">{u}</span>)}
                       </div>
-                      <button onClick={() => handleMajorClick(m.name)} className="flex items-center gap-1.5 text-[11px] cursor-pointer transition-colors group/edu text-slate-400 dark:text-white/30 hover:text-blue-600 dark:hover:text-blue-400">
+                      <button onClick={() => handleMajorClick(m)} className="flex items-center gap-1.5 text-[11px] cursor-pointer transition-colors group/edu text-slate-400 dark:text-white/30 hover:text-blue-600 dark:hover:text-blue-400">
                         <HiAcademicCap className="w-3.5 h-3.5" /> Lihat detail jurusan ini <HiExternalLink className="w-3 h-3" />
                       </button>
                     </div>
@@ -470,7 +515,7 @@ export default function ResultPage({ result, onRetry }) {
                     <div className="w-9 h-9 rounded-xl flex items-center justify-center bg-violet-100 dark:bg-violet-500/10"><HiChartBar className="w-4 h-4 text-violet-600 dark:text-violet-400" /></div>
                     <div className="text-left">
                       <p className="text-sm font-semibold text-slate-900 dark:text-white">Roadmap 5 tahun</p>
-                      <p className="text-xs text-slate-500 dark:text-white/35">{roadmapOpen ? "Tutup" : "Klik untuk lihat rencana karir →"}</p>
+                      <p className="text-xs text-slate-500 dark:text-white/35">{roadmapOpen ? "Tutup" : "Rencana Pengembangan Skill →"}</p>
                     </div>
                   </div>
                   <div className="w-7 h-7 rounded-lg flex items-center justify-center bg-white dark:bg-white/5"><HiChevronDown className={`w-4 h-4 transition-transform duration-300 ${roadmapOpen ? "rotate-180" : ""} text-slate-500 dark:text-white/40`} /></div>
