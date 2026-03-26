@@ -2,39 +2,47 @@
 
 import { useEffect, useRef, useState } from "react";
 import { ArrowUpRight } from "lucide-react";
+import ringkasanKarierLight from "../../assets/ringkasankarir-light.jpeg";
+import ringkasanKarierDark from "../../assets/ringkasankarir-dark.jpeg";
+import kesenjanganLight from "../../assets/kesenjangan-light.png";
+import kesenjanganDark from "../../assets/kesenjangan-dark.png";
+import petaJalanBelajarLight from "../../assets/petajalanbelajar-light.png";
+import petaJalanBelajarDark from "../../assets/petajalanbelajar-dark.png";
+import pencocokanKarierLight from "../../assets/pencocokankarir-light.png";
+import pencocokanKarierDark from "../../assets/pencocokankarir-dark.png";
 
 const projects = [
     {
-        title: "Career Snapshot",
+        title: "Ringkasan Karier",
         description: "Peta cepat minat, kekuatan, dan kecocokan lewat jalur karir.",
 
         link: "/ai-career-test",
-        image:
-            "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1200&q=80",
+        imageLight: ringkasanKarierLight,
+        imageDark: ringkasanKarierDark,
     },
     {
-        title: "Skill Gap Map",
+        title: "Peta Kesenjangan Skill",
         description: "Visualisasi gap skill untuk target profesi yang kamu pilih.",
 
         link: "/career-compare",
-        image:
-            "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1200&q=80",
+        imageLight: kesenjanganLight,
+        imageDark: kesenjanganDark,
     },
     {
-        title: "Learning Roadmap",
+        title: "Peta Jalan Belajar",
         description: "Roadmap belajar bertahap dari level dasar sampai siap kerja.",
 
         link: "/explore-education",
-        image:
-            "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=1200&q=80",
+        imageLight: petaJalanBelajarLight,
+        imageDark: petaJalanBelajarDark,
     },
     {
-        title: "Career Matching",
+        title: "Pencocokan Karier",
         description: "Bandingkan opsi karir berdasarkan data dan preferensi personal.",
 
         link: "/explore-career",
-        image:
-            "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=1200&q=80",
+        imageLight: pencocokanKarierLight,
+        imageDark: pencocokanKarierDark,
     },
 ];
 
@@ -96,7 +104,7 @@ export function ProjectShowcase() {
             </h3>
 
             <div
-                className="pointer-events-none absolute z-50 overflow-hidden rounded-xl shadow-2xl"
+                className="pointer-events-none absolute z-50"
                 style={{
                     left: smoothPosition.x + 24,
                     top: smoothPosition.y - 96,
@@ -106,22 +114,20 @@ export function ProjectShowcase() {
                         "opacity 0.25s cubic-bezier(0.4,0,0.2,1), scale 0.25s cubic-bezier(0.4,0,0.2,1)",
                 }}
             >
-                <div className="relative h-45 w-70 overflow-hidden rounded-xl bg-slate-200 dark:bg-slate-900">
-                    {projects.map((project, index) => (
+                {hoveredIndex !== null && (
+                    <div className="rounded-xl border border-slate-300/45 bg-white p-1 dark:border-[rgba(255,255,255,0.12)] dark:bg-[rgb(20,20,24)]">
                         <img
-                            key={project.title}
-                            src={project.image}
-                            alt={project.title}
-                            className="absolute inset-0 h-full w-full object-cover transition-all duration-500 ease-out"
-                            style={{
-                                opacity: hoveredIndex === index ? 1 : 0,
-                                scale: hoveredIndex === index ? 1 : 1.08,
-                                filter: hoveredIndex === index ? "none" : "blur(10px)",
-                            }}
+                            src={projects[hoveredIndex].imageLight}
+                            alt={projects[hoveredIndex].title}
+                            className="block max-h-70 w-auto max-w-105 rounded-lg object-contain dark:hidden"
                         />
-                    ))}
-                    <div className="absolute inset-0 bg-linear-to-t from-black/40 to-transparent" />
-                </div>
+                        <img
+                            src={projects[hoveredIndex].imageDark}
+                            alt={projects[hoveredIndex].title}
+                            className="hidden max-h-70 w-auto max-w-105 rounded-lg object-contain dark:block"
+                        />
+                    </div>
+                )}
             </div>
 
             <div className="space-y-0">

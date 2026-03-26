@@ -3,7 +3,7 @@ const WHY_CARDS = [
 		title: "Temukan Minat Anda",
 		category: "Penilaian Diri",
 		desc: "Penilaian AI memetakan minat, kepribadian, dan kecenderungan Anda ke pilihan karir yang relevan.",
-		img: "https://images.unsplash.com/photo-1601342630314-8427c38bf5e6?q=80&w=691&auto=format&fit=crop",
+		img: "https://images.unsplash.com/photo-1758270704417-26c1244cfaf3?q=80&w=1331&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D	",
 	},
 	{
 		title: "Analisis Keterampilan Anda",
@@ -15,7 +15,7 @@ const WHY_CARDS = [
 		title: "Rencanakan Karir Masa Depan",
 		category: "Peta Jalan Karir",
 		desc: "Dapatkan roadmap 5 tahun yang berisi milestone, rekomendasi aksi, dan langkah konkret yang bisa langsung dijalankan.",
-		img: "https://images.unsplash.com/photo-1531403009284-440f080d1e12?q=80&w=1170&auto=format&fit=crop",
+		img: "https://images.unsplash.com/photo-1531545514256-b1400bc00f31?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
 	},
 ];
 
