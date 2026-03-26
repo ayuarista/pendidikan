@@ -35,7 +35,7 @@ const STATS = [
 
 export default function IntroPage({ onStart }) {
   return (
-    <div className="pt-24 sm:pt-0 min-h-screen dark:bg-background bg-neutral-100 flex items-center justify-center p-5 relative overflow-hidden transition-colors duration-300">
+    <div className="pt-28 sm:pt-16 lg:pt-20 min-h-screen dark:bg-background bg-neutral-100 flex items-center justify-center p-5 relative overflow-hidden transition-colors duration-300">
 
       {/* Background Grid Pattern */}
       <div className="absolute inset-0 dark:opacity-[0.08] opacity-[0.10]"
