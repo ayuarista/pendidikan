@@ -1162,6 +1162,7 @@ export function getMajorByName(name) {
   );
 }
 
+//fallback builder untuk jurusan yang tidak ada di data, dengan kategori dan warna berdasarkan nama jurusan
 export function buildMajorFallback(major) {
   const name = major?.name || major?.title || "Jurusan Ini";
   const t = name.toLowerCase();
