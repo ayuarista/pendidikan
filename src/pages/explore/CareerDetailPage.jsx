@@ -118,7 +118,7 @@ export default function CareerDetailPage({ career: careerProp, onBack }) {
           <div className="mx-auto w-full max-w-6xl px-5 sm:px-8 flex items-center justify-between">
             <button
               onClick={handleBack}
-              className="inline-flex items-center gap-1.5 rounded-full border border-black/65 bg-black/80 px-5 py-2.5 text-sm font-semibold text-white shadow-sm backdrop-blur-md transition-colors hover:bg-black/90 dark:border-white/65 dark:bg-white/85 dark:text-neutral-900 dark:hover:bg-white"
+              className="hover:cursor-pointer inline-flex items-center gap-1.5 rounded-full border border-black/65 bg-black/80 px-5 py-2.5 text-sm font-semibold text-white shadow-sm backdrop-blur-md transition-colors hover:bg-black/90 dark:border-white/65 dark:bg-white/85 dark:text-neutral-900 dark:hover:bg-white"
             >
               <HiArrowLeft className="size-4" />
               Kembali
@@ -325,7 +325,7 @@ export default function CareerDetailPage({ career: careerProp, onBack }) {
         {/* BACK */}
         <button
           onClick={handleBack}
-          className="w-full flex items-center justify-center gap-2 py-3.5 rounded-xl text-sm font-medium transition-all
+          className="hover:cursor-pointer w-full flex items-center justify-center gap-2 py-3.5 rounded-xl text-sm font-medium transition-all
             bg-white hover:bg-neutral-100 text-neutral-400 hover:text-neutral-700
             dark:bg-[#111116] dark:hover:bg-[#15151b] dark:text-neutral-500 dark:hover:text-neutral-200
             border border-black/[0.05] dark:border-transparent"

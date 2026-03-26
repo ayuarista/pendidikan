@@ -82,9 +82,9 @@ function MajorCard({ major, onClick, style }) {
 }
 
 export default function ExploreEducation() {
-    useEffect(() => {
-      document.title = "Edutech - Explore Education";
-    }, []);
+  useEffect(() => {
+    document.title = "Edutech - Explore Education";
+  }, []);
   const navigate = useNavigate();
   const [query, setQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState("all");
@@ -213,7 +213,11 @@ export default function ExploreEducation() {
                 <MajorCard
                   key={major.slug}
                   major={major}
-                  onClick={slug => navigate(`/education/${slug}`)}
+                  onClick={slug => {
+                    sessionStorage.setItem("edu_detail_from", "explore");
+                    navigate(`/education/${slug}`, { state: { from: "explore" } });
+                  }}
+
                   style={{ animation: `fadeUp .4s ease ${Math.min(i * 0.04, 0.24)}s both` }}
                 />
               ))}
