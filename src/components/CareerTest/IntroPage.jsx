@@ -67,7 +67,7 @@ export default function IntroPage({ onStart }) {
           </p>
         </div>
 
-        {/* Feature grid */}
+        {/* Card grid */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-10">
           {FEATURES.map(({ icon: Icon, label, desc, color }, i) => (
             <div key={i}

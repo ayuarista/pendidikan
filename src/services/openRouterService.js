@@ -80,7 +80,7 @@ const FALLBACK_RESULT = {
   motivationalMessage: "Potensimu jauh lebih besar dari yang kamu bayangkan — mulai satu langkah kecil hari ini, dan konsistensi akan membawa kamu jauh.",
 };
 
-// ─── Normalizer: pastikan semua field selalu ada ──────────────────────────────
+// ─── Normalizer: memastikan semua field selalu ada
 function normalizeResult(raw) {
   return {
     personalityType:        raw.personalityType        || FALLBACK_RESULT.personalityType,
@@ -125,7 +125,7 @@ export const analyzeCareerWithAI = async (userPrompt) => {
       }),
     });
 
-    // ── Bug fix #1: cek HTTP error sebelum parse JSON ──────────────────────
+    // ── Bug fix #1: cek HTTP error sebelum parse JSON
     if (!res.ok) {
       const errText = await res.text().catch(() => `HTTP ${res.status}`);
       console.error(`Groq HTTP ${res.status}:`, errText);
@@ -134,7 +134,7 @@ export const analyzeCareerWithAI = async (userPrompt) => {
 
     const data = await res.json();
 
-    // ── Bug fix #2: cek error field dari Groq ─────────────────────────────
+    // ── Bug fix #2: cek error field dari Groq
     if (data.error) {
       console.error("Groq API error:", data.error.message);
       return FALLBACK_RESULT;
@@ -146,7 +146,7 @@ export const analyzeCareerWithAI = async (userPrompt) => {
       return FALLBACK_RESULT;
     }
 
-    // ── Bug fix #3: parse JSON dengan fallback regex, normalize hasilnya ──
+    // ── Bug fix #3: parse JSON dengan fallback regex, normalize hasilnya
     let parsed;
     try {
       parsed = JSON.parse(content);
@@ -165,11 +165,11 @@ export const analyzeCareerWithAI = async (userPrompt) => {
       }
     }
 
-    // ── Bug fix #4: normalisasi agar semua field selalu ada ───────────────
+    // ── Bug fix #4: normalisasi agar semua field selalu ada
     return normalizeResult(parsed);
 
   } catch (err) {
-    // ── Bug fix #5: network error / offline / race condition ──────────────
+    // ── Bug fix #5: network error / offline / race condition
     console.error("Groq fetch error:", err.message);
     return FALLBACK_RESULT;
   }

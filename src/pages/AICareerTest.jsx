@@ -10,6 +10,7 @@ export default function AICareerTest() {
     useEffect(() => {
     document.title = "Edutech - AI Career Analysis";
   }, []);
+  
   const [step, setStep] = useState("intro"); 
   const [answers, setAnswers] = useState({});
   const [result, setResult] = useState(null);

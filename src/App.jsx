@@ -14,6 +14,8 @@ import EducationDetailPage from "./pages/explore/EducationDetailPage"
 import ScrolltoTop from "./components/feature/ScrolltoTop"
 
 export default function App() {
+
+  //app
   return (
     <LanguageProvider>
       <Router>

@@ -33,7 +33,6 @@ export default function EducationDetailPage({ major: majorProp, onBack }) {
 
   const demand = d ? (DEMAND_LEVEL[d.demand] || DEMAND_LEVEL["Sedang"]) : null;
 
-  // ─── Set Page Title ────────────────────────────────────────────────────────
   useEffect(() => {
     const prevTitle = document.title;
     if (d?.name) {
@@ -63,7 +62,6 @@ export default function EducationDetailPage({ major: majorProp, onBack }) {
     }
   };
 
-  // ── Not Found ──────────────────────────────────────────────────────────────
   if (!d) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center gap-5 px-4

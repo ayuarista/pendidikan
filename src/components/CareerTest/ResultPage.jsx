@@ -431,9 +431,6 @@ export default function ResultPage({ result, onRetry }) {
           </p>
         </FadeUp>
 
-        {/* KONTEN WEB SEPERTI SEBELUMNYA... */}
-        {/* (Saya ringkas pemanggilannya agar tidak memenuhi ruang, strukturnya sama persis dengan kode kamu yang lama) */}
-
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
           {/* Karir */}
           <FadeUp delay={120} className="col-span-2 row-span-2">
@@ -468,7 +465,6 @@ export default function ResultPage({ result, onRetry }) {
             </div>
           </FadeUp>
 
-          {/* Sidebar (Jurusan, UMKM, Roadmap) - Singkatnya saya tulis struktur ringkasnya */}
           <FadeUp delay={240}>
             <div className="grid grid-cols-1 gap-12">
 

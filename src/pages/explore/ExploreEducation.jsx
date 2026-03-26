@@ -81,7 +81,6 @@ function MajorCard({ major, onClick, style }) {
   );
 }
 
-// ─── Page ─────────────────────────────────────────────────────────────────────
 export default function ExploreEducation() {
   useEffect(() => {
     document.title = "Edutech - Explore Education";
