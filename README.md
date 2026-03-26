@@ -16,7 +16,7 @@ Aplikasi web yang dirancang untuk membantu siswa menemukan jalur karir ideal mer
 -   **Styling**: Tailwind CSS
 -   **Bantuan analisis dari AI**: Groq API (llama-3.1-8b-instant)
 
-## 🚀 Start
+## 🚀 Cara instalasi project
 
 ### Prasyarat
 
