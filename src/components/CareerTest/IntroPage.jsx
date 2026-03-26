@@ -35,11 +35,11 @@ const STATS = [
 
 export default function IntroPage({ onStart }) {
   return (
-    <div className="min-h-screen dark:bg-slate-950 bg-neutral-100 flex items-center justify-center p-5 relative overflow-hidden transition-colors duration-300">
+    <div className="pt-24 sm:pt-0 min-h-screen dark:bg-background bg-neutral-100 flex items-center justify-center p-5 relative overflow-hidden transition-colors duration-300">
 
       {/* Background Grid Pattern */}
-      <div className="absolute inset-0 dark:opacity-[0.10] opacity-[0.05]"
-        style={{ backgroundImage: "linear-gradient(#3b82f6 1px,transparent 1px),linear-gradient(90deg,#3b82f6 1px,transparent 1px)", backgroundSize: "48px 48px" }} />
+      <div className="absolute inset-0 dark:opacity-[0.08] opacity-[0.10]"
+        style={{ backgroundImage: "linear-gradient(#a3a3a3 1px,transparent 1px),linear-gradient(90deg,#a3a3a3 1px,transparent 1px)", backgroundSize: "48px 48px" }} />
 
       {/* Glow blobs */}
       <div className="absolute top-1/4 -left-32 w-72 h-72 dark:bg-blue-600/15 bg-blue-400/30 rounded-full blur-3xl pointer-events-none" />
@@ -59,19 +59,19 @@ export default function IntroPage({ onStart }) {
           <h1 className="font-accent font-black dark:text-white text-slate-900 leading-none mb-4"
             style={{ fontSize: "clamp(2.4rem, 7vw, 4rem)", letterSpacing: "-0.02em" }}>
             Cari Tahu Karir<br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-b dark:from-secondary dark:to-blue-700 from-blue-600 to-blue-800">Impian Kamu</span>
+            <span className="text-transparent bg-clip-text bg-gradient-to-b dark:from-violet-200 dark:to-violet-700 from-violet-500 to-blue-800">Impian Kamu</span>
           </h1>
-          <p className="dark:text-slate-400 text-slate-600 leading-relaxed max-w-md mx-auto text-sm lg:text-base">
+          <p className="dark:text-slate-400 text-slate-600 leading-relaxed max-w-md mx-auto text-[12px] lg:text-base">
             Jawab <strong className="dark:text-white text-slate-900">15 pertanyaan</strong> singkat, dan AI kami bakal kasih rekomendasi
             karir, jurusan kuliah, roadmap skill, sampai ide bisnis yang cocok buat kamu.
           </p>
         </div>
 
-        {/* Card grid */}
+        {/* Feature grid */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-10">
           {FEATURES.map(({ icon: Icon, label, desc, color }, i) => (
             <div key={i}
-              className="dark:bg-gray-900 bg-neutral-50 rounded-2xl p-3.5 flex flex-col gap-3 dark:shadow-none"
+              className="dark:bg-neutral-900 bg-neutral-50 rounded-2xl p-3.5 flex flex-col gap-3 dark:shadow-none"
               style={{ animation: `fadeUp .4s ease ${i * 0.07}s both` }}>
               <div className={`w-9 h-9 rounded-xl border flex items-center justify-center ${color}`}>
                 <Icon className="w-4.5 h-4.5" />
@@ -96,7 +96,7 @@ export default function IntroPage({ onStart }) {
           </div>
           
           <button onClick={onStart}
-            className="hover:cursor-pointer sm:flex-1 w-full sm:w-auto bg-primary hover:bg-secondary active:scale-95 text-white font-bold py-4 px-8 rounded-xl flex items-center justify-center gap-2 transition-all duration-200 hover:shadow-2xl hover:shadow-blue-500/30 text-sm group">
+            className="hover:cursor-pointer sm:flex-1 w-full sm:w-auto bg-violet-500 hover:bg-violet-700 active:scale-95 text-white font-bold py-4 px-8 rounded-xl flex items-center justify-center gap-2 transition-all duration-200 hover:shadow-2xl hover:shadow-violet-500/30 text-sm group">
             Mulai Tes <HiArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform" />
           </button>
         </div>

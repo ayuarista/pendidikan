@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import IntroPage from "../components/CareerTest/IntroPage";
 import TestPage from "../components/CareerTest/TestPage";
 import LoadingPage from "../components/CareerTest/LoadingPage";
