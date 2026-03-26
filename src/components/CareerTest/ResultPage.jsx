@@ -34,7 +34,6 @@ function getAvatarUrl(type) {
   return `https://api.dicebear.com/6.x/avataaars/svg?seed=${seed}&backgroundColor=ffdfbf`;
 }
 
-// ─── UI ATOMS (WEB) ───────────────────────────────────────────────────────────
 function Bar({ pct, color, trackColor = "bg-neutral-200 dark:bg-white/[0.06]", delay = 0 }) {
   const [w, setW] = useState(0);
   useEffect(() => { const t = setTimeout(() => setW(pct), 350 + delay); return () => clearTimeout(t); }, [pct]);
