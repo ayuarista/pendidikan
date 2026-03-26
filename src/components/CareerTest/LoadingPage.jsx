@@ -19,7 +19,7 @@ export default function LoadingPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-slate-950 flex flex-col items-center justify-center gap-8 p-6">
+    <div className="min-h-screen bg-white dark:bg-background flex flex-col items-center justify-center gap-8 p-6">
       <style>{`
         @keyframes spin { to{transform:rotate(360deg)} }
         @keyframes fadeMsg { 0%{opacity:0;transform:translateY(8px)} 20%,80%{opacity:1;transform:translateY(0)} 100%{opacity:0} }
@@ -28,7 +28,7 @@ export default function LoadingPage() {
 
       {/* Spinner stack */}
       <div className="relative w-24 h-24">
-        <div className="absolute inset-0 rounded-full border-4 border-slate-800" />
+        <div className="absolute inset-0 rounded-full border-4 border-neutral-200 dark:border-slate-800" />
         <div className="absolute inset-0 rounded-full border-4 border-transparent border-t-blue-500"
           style={{ animation: "spin 1s linear infinite" }} />
         <div className="absolute inset-2 rounded-full border-4 border-transparent border-t-violet-500"
@@ -39,7 +39,7 @@ export default function LoadingPage() {
       </div>
 
       <div className="text-center">
-        <p key={idx} className="text-white font-bold text-lg mb-2"
+        <p key={idx} className="text-neutral-800 dark:text-white font-bold text-lg mb-2"
             style={{ animation: "fadeMsg 2s ease both" }}>
             {MESSAGES[idx]}
         </p>
