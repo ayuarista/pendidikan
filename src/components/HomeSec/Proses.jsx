@@ -92,11 +92,9 @@ export default function Proses() {
 		return (
 			<article
 				key={step.id}
-				data-aos="fade-up"
-				data-aos-delay={120 + index * 70}
 				onClick={() => handleStepClick(index)}
 				className={`overflow-hidden rounded-2xl transition-all duration-300 ${isOpen
-					? "border-transparent bg-white dark:border-[rgba(255,255,255,0.06)] dark:bg-[rgb(20,20,24)]"
+					? "relative z-10 border-transparent bg-white shadow-[0_12px_30px_rgba(15,23,42,0.08)] dark:border-[rgba(255,255,255,0.06)] dark:bg-[rgb(20,20,24)] dark:shadow-none"
 					: "cursor-pointer border-transparent bg-white hover:bg-slate-50 dark:border-[rgba(255,255,255,0.06)] dark:bg-[rgb(20,20,24)] dark:hover:border-[rgba(255,255,255,0.12)] dark:hover:bg-[rgb(24,24,30)]"
 					}`}
 			>
