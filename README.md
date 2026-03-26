@@ -1,16 +1,56 @@
-# React + Vite
+# Edutech 
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A web application designed to help students discover their ideal career paths based on personality analysis powered by AI.
 
-Currently, two official plugins are available:
+## ✨ Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+-   **Personality Assessment**: Interactive quiz to map user personality traits.
+-   **AI-Powered Analysis**: Utilizes Groq (Llama 3) for fast and deep career matching.
+-   **Comprehensive Results**: Detailed breakdown of career recommendations, skill gaps, and university majors.
+-   **PDF Export**: Downloadable detailed report generated.
+-   **Responsive Design**: Fully responsive UI built with Tailwind CSS.
 
-## React Compiler
+## 🛠 Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+-   **Frontend**: React.js, Vite
+-   **Styling**: Tailwind CSS
+-   **AI Engine**: Groq API (llama-3.1-8b-instant)
 
-## Expanding the ESLint configuration
+## 🚀 Getting Started
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Prerequisites
+
+-   Node.js (v18 or higher)
+-   npm or yarn
+-   Groq API Key
+
+### Installation
+
+1.  Install dependencies:
+    ```bash
+    npm install
+    ```
+
+2.  Set up environment variables:
+    Create a `.env` file in the root directory.
+    ```env
+    VITE_GROQ_API_KEY=your_groq_api_key_here
+    ```
+
+3.  Run the development server:
+    ```bash
+    npm run dev
+    ```
+
+## 🤖 AI Integration (Groq)
+
+This application uses the **Groq API** to generate career recommendations.
+
+1.  **Prompt Engineering**: User answers are compiled into a structured prompt asking for career matches, skill analysis, and study recommendations in JSON format.
+2.  **API Call**: The frontend sends a request to the Groq API endpoint (chat/completions) using the `Llama-3.1-70b-versatile` model for low-latency responses.
+3.  **Response Parsing**: The raw text response from the AI is parsed into a JSON object to populate the `ResultPage` dynamically.
+
+*Note: Ensure your API Key is kept secure and not exposed in production builds without a backend proxy if possible.*
+
+Made with ❤️ by Edutech Team
+```
