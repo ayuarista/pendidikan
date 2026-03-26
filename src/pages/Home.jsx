@@ -121,18 +121,33 @@ export default function Home() {
                 </div>
                 <div className="relative z-10 mx-auto w-full max-w-6xl">
                     <div>
-                        <p data-aos="fade-up" className="mb-3 text-[11px] font-semibold uppercase tracking-[0.14em] text-neutral-400 dark:text-white/25">
+                        <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.14em] text-neutral-400 dark:text-white/25">
                             Platform Eksplorasi Karir dan Pendidikan
                         </p>
-                        <h1 data-aos="fade-up" data-aos-delay="80" className="max-w-3xl text-4xl font-bold leading-tight tracking-tight text-slate-900 dark:text-white md:text-5xl">
+                        <h1 className="max-w-3xl text-4xl font-bold leading-tight tracking-tight text-slate-900 dark:text-white md:text-5xl">
                             Temukan Arah Belajar dan Karirmu dengan Lebih Jelas
                         </h1>
-                        <p data-aos="fade-up" data-aos-delay="140" className="mt-4 max-w-2xl text-sm leading-7 text-slate-700 dark:text-white/75 md:text-base">
+                        <p className="mt-4 max-w-2xl text-sm leading-7 text-slate-700 dark:text-white/75 md:text-base">
                             Website ini bantu kamu memahami pilihan masa depan lewat kombinasi tes AI,
                             eksplorasi data karir, eksplorasi jurusan, dan perbandingan opsi secara objektif.
                         </p>
 
-                        <div data-aos="fade-up" data-aos-delay="200" className="mt-7 flex flex-wrap gap-3">
+                        <div className="mt-5 flex flex-wrap gap-2">
+                            <article className="w-fit min-w-34 rounded-xl border border-slate-200/75 bg-white/62 px-2 py-2 ring-1 ring-slate-900/4 backdrop-blur-sm dark:border-white/10 dark:bg-white/4 dark:ring-0">
+                                <p className="text-base font-semibold text-slate-800 dark:text-white/90">200+</p>
+                                <p className="text-[11px] uppercase tracking-[0.12em] text-slate-500 dark:text-white/55">Data profesi</p>
+                            </article>
+                            <article className="w-fit min-w-34 rounded-xl border border-slate-200/75 bg-white/62 px-2 py-2 ring-1 ring-slate-900/4 backdrop-blur-sm dark:border-white/10 dark:bg-white/4 dark:ring-0">
+                                <p className="text-base font-semibold text-slate-800 dark:text-white/90">180+</p>
+                                <p className="text-[11px] uppercase tracking-[0.12em] text-slate-500 dark:text-white/55">Data jurusan</p>
+                            </article>
+                            <article className="w-fit min-w-34 rounded-xl border border-slate-200/75 bg-white/62 px-2 py-2 ring-1 ring-slate-900/4 backdrop-blur-sm dark:border-white/10 dark:bg-white/4 dark:ring-0">
+                                <p className="text-base font-semibold text-slate-800 dark:text-white/90">4</p>
+                                <p className="text-[11px] uppercase tracking-[0.12em] text-slate-500 dark:text-white/55">Fitur utama</p>
+                            </article>
+                        </div>
+
+                        <div className="mt-7 flex flex-wrap gap-3">
                             <Link
                                 to="/ai-career-test"
                                 className="inline-flex h-11 items-center justify-center rounded-full bg-linear-to-r from-violet-600 to-fuchsia-500 px-5 text-sm font-medium text-white shadow-lg shadow-violet-900/35 transition hover:-translate-y-0.5"
@@ -147,40 +162,23 @@ export default function Home() {
                             </Link>
                         </div>
 
-                        <div data-aos="fade-up" data-aos-delay="260" className="mt-4 max-w-3xl">
+                        <div className="mt-4 max-w-3xl">
                             <Testimonials />
                         </div>
-                    </div>
-
-                    <div className="mt-7 grid grid-cols-1 gap-3 md:grid-cols-3">
-                        <article data-aos="fade-up" data-aos-delay="120" className="rounded-2xl border border-transparent bg-white/78 p-4 shadow-[0_1px_0_rgba(15,23,42,0.05)] ring-1 ring-slate-900/5 backdrop-blur dark:border-white/10 dark:bg-white/5 dark:ring-0">
-                            <h3 className="text-xl font-bold text-slate-900 dark:text-white">{CAREERS.length}+</h3>
-                            <p className="text-sm text-slate-600 dark:text-white/70">Data profesi</p>
-                        </article>
-                        <article data-aos="fade-up" data-aos-delay="180" className="rounded-2xl border border-transparent bg-white/78 p-4 shadow-[0_1px_0_rgba(15,23,42,0.05)] ring-1 ring-slate-900/5 backdrop-blur dark:border-white/10 dark:bg-white/5 dark:ring-0">
-                            <h3 className="text-xl font-bold text-slate-900 dark:text-white">{MAJORS.length}+</h3>
-                            <p className="text-sm text-slate-600 dark:text-white/70">Data jurusan</p>
-                        </article>
-                        <article data-aos="fade-up" data-aos-delay="240" className="rounded-2xl border border-transparent bg-white/78 p-4 shadow-[0_1px_0_rgba(15,23,42,0.05)] ring-1 ring-slate-900/5 backdrop-blur dark:border-white/10 dark:bg-white/5 dark:ring-0">
-                            <h3 className="text-xl font-bold text-slate-900 dark:text-white">4</h3>
-                            <p className="text-sm text-slate-600 dark:text-white/70">Fitur utama</p>
-                        </article>
                     </div>
                 </div>
             </section>
 
             <section className="px-4 py-6">
                 <div className="mx-auto w-full max-w-6xl">
-                    <p data-aos="fade-up" className="text-[11px] font-semibold uppercase tracking-[0.14em] text-neutral-400 dark:text-white/25">Fitur Utama</p>
-                    <h2 data-aos="fade-up" data-aos-delay="80" className="mt-2 text-2xl font-bold tracking-tight text-slate-900 dark:text-white md:text-3xl">
+                    <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-neutral-400 dark:text-white/25">Fitur Utama</p>
+                    <h2 className="mt-2 text-2xl font-bold tracking-tight text-slate-900 dark:text-white md:text-3xl">
                         Yang Bisa Kamu Lakukan di Website Ini
                     </h2>
                     <div className="mt-5 grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-4">
-                        {FEATURES.map((item, index) => (
+                        {FEATURES.map((item) => (
                             <article
                                 key={item.title}
-                                data-aos="fade-up"
-                                data-aos-delay={120 + index * 70}
                                 className="group relative overflow-hidden rounded-xl bg-white p-4 transition-all duration-300 hover:-translate-y-0.5 dark:bg-black"
                             >
                                 <div className="absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
@@ -228,14 +226,14 @@ export default function Home() {
 
             <section className="px-4 py-8">
                 <div className="mx-auto w-full max-w-6xl">
-                    <p data-aos="fade-up" className="text-[11px] font-semibold uppercase tracking-[0.14em] text-neutral-400 dark:text-white/25">Panduan Pakai</p>
-                    <h2 data-aos="fade-up" data-aos-delay="80" className="mt-2 text-2xl font-bold tracking-tight text-slate-900 dark:text-white md:text-3xl">
+                    <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-neutral-400 dark:text-white/25">Panduan Pakai</p>
+                    <h2 className="mt-2 text-2xl font-bold tracking-tight text-slate-900 dark:text-white md:text-3xl">
                         Pilih Fitur Berdasarkan Kondisi Kamu Sekarang
                     </h2>
-                    <p data-aos="fade-up" data-aos-delay="120" className="mt-2 max-w-3xl text-sm leading-6 text-slate-600 dark:text-white/70">
+                    <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-600 dark:text-white/70">
                         Bagian ini fokus ke skenario penggunaan, jadi kamu bisa langsung tahu fitur mana yang dipakai duluan.
                     </p>
-                    <div data-aos="fade-up" data-aos-delay="160" className="mt-4">
+                    <div className="mt-4">
                         <BentoGridDemo />
                     </div>
                 </div>
@@ -243,17 +241,15 @@ export default function Home() {
 
             <section className="border-y border-slate-300/40 bg-white px-4 py-8 dark:border-[rgba(255,255,255,0.06)] dark:bg-[rgb(20,20,24)]">
                 <div className="mx-auto w-full max-w-6xl">
-                    <p data-aos="fade-up" className="text-[11px] font-semibold uppercase tracking-[0.14em] text-neutral-400 dark:text-white/25">Rekomendasi Cepat</p>
-                    <h2 data-aos="fade-up" data-aos-delay="80" className="mt-2 text-2xl font-bold tracking-tight text-slate-900 dark:text-white md:text-3xl">
+                    <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-neutral-400 dark:text-white/25">Rekomendasi Cepat</p>
+                    <h2 className="mt-2 text-2xl font-bold tracking-tight text-slate-900 dark:text-white md:text-3xl">
                         Mulai dari Pilihan Populer
                     </h2>
 
                     <div className="mt-5 grid grid-cols-1 items-start gap-5 lg:grid-cols-[0.95fr_1.05fr]">
-                        <div data-aos="fade-up" data-aos-delay="120">
-                            <ProjectShowcaseDemo />
-                        </div>
+                        <ProjectShowcaseDemo />
 
-                        <div data-aos="fade-up" data-aos-delay="180" className="relative lg:-mt-16 xl:-mt-25">
+                        <div className="relative lg:-mt-16 xl:-mt-25">
                             <div
                                 aria-hidden="true"
                                 className="pointer-events-none absolute -right-24 top-1/2 z-0 h-96 w-96 -translate-y-1/2 rounded-full bg-linear-to-br from-violet-700/45 via-violet-500/35 to-violet-300/22 blur-[130px]"

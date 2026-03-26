@@ -80,6 +80,13 @@
   transition: opacity 0.2s ease;
 }
 
+.navbar-logo__img {
+  width: 40px;
+  height: 40px;
+  display: block;
+  object-fit: contain;
+}
+
 .navbar-logo:hover {
   opacity: 0.85;
 }

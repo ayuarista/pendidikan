@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useLang } from "../../context/LanguageContext";
 import "./Footer.css";
+import logoImg from "../../assets/edutech-logos.png";
 
 const LINK_HREFS = [
     ["/", "/ai-career-test", "/career-compare"],
@@ -70,19 +71,9 @@ export default function Footer() {
 
                 {/* Brand column */}
                 <div className="site-footer__brand">
-                    <div className="site-footer__logo-row">
-                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                            <rect width="32" height="32" rx="9" fill="url(#flg)" />
-                            <path d="M17.6 7L9 18h7l-1.6 7L23 16h-7l1.6-9Z" fill="#fff" />
-                            <defs>
-                                <linearGradient id="flg" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
-                                    <stop stopColor="#7c3aed" />
-                                    <stop offset="1" stopColor="#a855f7" />
-                                </linearGradient>
-                            </defs>
-                        </svg>
-                        <span className="site-footer__brand-name">Edutech</span>
-                    </div>
+                    <Link to="/" className="site-footer__logo-row" aria-label="Back to home">
+                        <img src={logoImg} alt="Edutech Logo" className="site-footer__logo-img" />
+                    </Link>
 
                     <p className="site-footer__tagline">{ft.tagline}</p>
 

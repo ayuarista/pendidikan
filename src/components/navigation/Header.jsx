@@ -3,6 +3,7 @@ import { Link, NavLink } from "react-router-dom";
 import { useLang } from "../../context/LanguageContext";
 import "./Header.css";
 import ThemeToggle from "../ui/ThemeToggle";
+import logoImg from "../../assets/edutech-logos.png";
 
 const MENU_HREFS = [
   "/",
@@ -43,16 +44,7 @@ export default function Header() {
 
           {/* Logo */}
           <Link to="/" className="navbar-logo" aria-label="Homepage">
-            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <rect width="32" height="32" rx="9" fill="url(#lg)" />
-              <path d="M17.6 7L9 18h7l-1.6 7L23 16h-7l1.6-9Z" fill="#fff" />
-              <defs>
-                <linearGradient id="lg" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
-                  <stop stopColor="#7c3aed" />
-                  <stop offset="1" stopColor="#a855f7" />
-                </linearGradient>
-              </defs>
-            </svg>
+            <img src={logoImg} alt="CareerAI Logo" className="navbar-logo__img" />
           </Link>
 
           {/* Desktop navigation */}

@@ -126,7 +126,7 @@ export default function ExploreCareer() {
             className="font-bold tracking-tight mb-3 font-accent text-neutral-900 dark:text-white"
             style={{ fontSize: "clamp(1.25rem,5vw,3rem)", letterSpacing: "-0.025em" }}
           >
-            Explore Career
+            Jelajahi Karir
           </h1>
           <p className="text-sm leading-relaxed max-w-lg text-neutral-500 dark:text-white/35">
             Jelajahi berbagai pilihan karir secara bebas — tanpa harus ikut tes dulu.
