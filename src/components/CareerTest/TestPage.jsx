@@ -2,7 +2,7 @@ import { useState, useRef, useCallback, useEffect } from "react";
 import { HiArrowLeft, HiArrowRight, HiSparkles, HiCheckCircle } from "react-icons/hi";
 import { QUESTIONS } from "../../config/aiConfig";
 
-
+//aa
 const TOTAL_BLOCKS = 5;
 
 function groupByBlock() {
